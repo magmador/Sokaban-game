@@ -8,6 +8,7 @@ EXECUTABLE =  ../bin/main
 all: exec
 
 debug: CFLAGS += -g3
+debug: CFLAGS += -DDEBUG
 debug: clean
 debug: exec
 
