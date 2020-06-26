@@ -60,18 +60,5 @@ int main()
 		printf("%d:%d \n", Player.yPos, Player.xPos);
 	}
 #endif
-	if (!PlayerMove("right", map, &Player, boxCount, Boxs, endpointCount, Endpoints))
-	{
-		printf("'%s': Can't move in selected direction\n", __FUNCTION__);
-	}
-#ifdef DEBUG
-	else
-	{
-		PlayerMove("up", map, &Player, boxCount, Boxs, endpointCount, Endpoints);
-		printf("'%s': Moving right, then up.\n", __FUNCTION__);
-		LevelOutput(map);
-	}
-#endif
-
 	return 0;
 }
