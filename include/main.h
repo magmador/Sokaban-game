@@ -58,9 +58,9 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t oCount, Object* 
 bool LevelSelect(int levelNumber, int ***map); //выбор уровня из пресета карт
 bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj); //инициализация массива объектов (obj - цифра с map, см. define в main.h)
 bool PlayerInit(Object *Player, int **map, int obj); //инициализация объекта игрока.
-void MoveUp(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вверх
-void MoveDown(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вниз
-void MoveLeft(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение влево
-void MoveRight(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вправо
+bool MoveUp(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вверх
+bool MoveDown(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вниз
+bool MoveLeft(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение влево
+bool MoveRight(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вправо
 
 #endif

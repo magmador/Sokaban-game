@@ -23,22 +23,34 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* 
 	{
 		case 1:
 		{
-			MoveUp(map, player, bCount, boxs, eCount, endpoints);
+			if (MoveUp(map, player, bCount, boxs, eCount, endpoints))
+			{
+				return true;
+			}
 			break;
 		}
 		case 2:
 		{
-			MoveDown(map, player, bCount, boxs, eCount, endpoints);
+			if(MoveDown(map, player, bCount, boxs, eCount, endpoints))
+			{
+				return true;
+			}
 			break;
 		}
 		case 3:
 		{
-			MoveLeft(map, player, bCount, boxs, eCount, endpoints);
+			if(MoveLeft(map, player, bCount, boxs, eCount, endpoints))
+			{
+				return true;
+			}
 			break;
 		}
 		case 4:
 		{
-			MoveRight(map, player, bCount, boxs, eCount, endpoints);
+			if(MoveRight(map, player, bCount, boxs, eCount, endpoints))
+			{
+				return true;
+			}
 			break;
 		}
 		default:
@@ -46,5 +58,4 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* 
 			return false;
 		}
 	}
-	return true;
 }
