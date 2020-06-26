@@ -31,3 +31,13 @@
 	{-1, 1, 1, 1, 1, 1, 1, 1, 1,-1}, \
 	{-1, 1, 1, 1, 1, 1, 1, 1, 1,-1}, \
 	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+
+typedef struct
+   {
+        int xPos;
+        int yPos;
+        int color_number;
+   } Object;
+
+void LevelOutput(int **map); //вывод карты уровня
+bool LevelSelect(int levelNumber, int ***map); //функция выбора уровня из пресета карт
