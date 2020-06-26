@@ -53,5 +53,12 @@ int main()
 		printf("'%s': Can't initialize object Player\n", __FUNCTION__);
 		exit(1);
 	}
+#ifdef DEBUG
+	else
+	{
+		printf("'%s': Object Player successfully initialized\n", __FUNCTION__);
+		printf("%d:%d \n", Player.yPos, Player.xPos);
+	}
+#endif	
 	return 0;
 }
