@@ -3,6 +3,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #define MAP_ROW_COUNT 10
 #define MAP_COL_COUNT 10
