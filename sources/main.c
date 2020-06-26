@@ -3,7 +3,7 @@
 int main()
 {
 	int **map = NULL;
-	if(!LevelSelect(0, &map))
+	if(!LevelSelect(1, &map))
 	{
 		printf("'%s': Level not loaded\n", __FUNCTION__);
 		exit(1);
