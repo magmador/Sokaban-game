@@ -17,8 +17,8 @@ int main()
 #endif
 	size_t boxCount = 0;
 	Object *Boxs; //массив ящиков
-	//Object *Endpoints; //массив эндпоинтов
-	//Object Player; //перменная игрока
+	Object *Endpoints; //массив эндпоинтов
+	Object Player; //перменная игрока
 	for(int row = 0; row < MAP_ROW_COUNT; row++)
 	{
 		for(int col = 0; col < MAP_COL_COUNT; col++)
