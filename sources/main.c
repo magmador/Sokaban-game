@@ -23,6 +23,11 @@ int main()
 	{
 		for(int col = 0; col < MAP_COL_COUNT; col++)
 		{
+			if(map[row][col] == 4)
+			{
+				Player.xPos = col;
+				Player.yPos = row;
+			}
 			if(boxCount == 0 && map[row][col] == 2)
 			{
 				boxCount++;
