@@ -1,14 +1,20 @@
 #include <ncurses.h>
 #include <stdbool.h>
+#include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
+#define BOX_MAP_OBJ 2
+#define ENDPOINT_MAP_OBJ 3
+#define PLAYER_MAP_OBJ 4
+
 #define MAP_ROW_COUNT 10
 #define MAP_COL_COUNT 10
 #define ROW_MAP_SIZE MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE MAP_COL_COUNT * sizeof(int)
+
 #define MAP0 \
 	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}, \
 	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}, \
@@ -43,3 +49,5 @@ typedef struct
 void LevelOutput(int **map); //вывод карты уровня
 bool LevelSelect(int levelNumber, int ***map); //функция выбора уровня из пресета карт
 bool PlayerMove(char* direct, int **map, Object* player);
+bool LevelSelect(int levelNumber, int ***map); //выбор уровня из пресета карт
+bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj); //инициализация массива объектов (obj - цифра с map, см. define в main.h)
