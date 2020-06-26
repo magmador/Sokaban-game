@@ -62,5 +62,5 @@ bool MoveUp(int **map, Object* player, size_t bCount, Object* boxs, size_t eCoun
 bool MoveDown(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вниз
 bool MoveLeft(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение влево
 bool MoveRight(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); //Движение вправо
-
+bool Winable(Object *Boxs, Object *Endpoints, size_t bCount, size_t eCount);
 #endif

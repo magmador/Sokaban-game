@@ -1,8 +1,8 @@
 #include "main.h"
 
-bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints)
+bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints)
 {
-	int tmpDirect = 0;
+	int tmpDirect = 0; //заменить при отрисовке графики на нажатие клавиши
 	if (!strcmp(direct,"up"))
 	{
 		tmpDirect = 1;
@@ -19,43 +19,48 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* 
 	{
 		tmpDirect = 4;
 	}
+	bool win;
 	switch (tmpDirect)
 	{
 		case 1:
 		{
-			if (MoveUp(map, player, bCount, boxs, eCount, endpoints))
+			if (MoveUp(map, player, bCount, Boxs, eCount, Endpoints))
 			{
-				return true;
+				if(win = Winable(Boxs, Endpoints, bCount, eCount))
+				return win;
 			}
 			break;
 		}
 		case 2:
 		{
-			if(MoveDown(map, player, bCount, boxs, eCount, endpoints))
+			if(MoveDown(map, player, bCount, Boxs, eCount, Endpoints))
 			{
-				return true;
+				if(win = Winable(Boxs, Endpoints, bCount, eCount))
+				return win;
 			}
 			break;
 		}
 		case 3:
 		{
-			if(MoveLeft(map, player, bCount, boxs, eCount, endpoints))
+			if(MoveLeft(map, player, bCount, Boxs, eCount, Endpoints))
 			{
-				return true;
+				if(win = Winable(Boxs, Endpoints, bCount, eCount))
+				return win;
 			}
 			break;
 		}
 		case 4:
 		{
-			if(MoveRight(map, player, bCount, boxs, eCount, endpoints))
+			if(MoveRight(map, player, bCount, Boxs, eCount, Endpoints))
 			{
-				return true;
+				if(win = Winable(Boxs, Endpoints, bCount, eCount))
+				return win;
 			}
 			break;
 		}
 		default:
 		{
-			return false;
+			//нажатие любой другой кнопки, помимо кнопок движения должно игнорироваться
 		}
 	}
 }
