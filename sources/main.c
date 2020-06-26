@@ -2,63 +2,87 @@
 
 int main()
 {
+	/* Блок инициализации ncurses */
+	initscr();
+    cbreak();
+    curs_set(FALSE);
+    noecho();
+    start_color();
+    refresh();
+
+	/* Отрисовка меню */
+	WINDOW *menuWnd;
+	DrawMenu(menuWnd);
+	
+	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
+	FILE *logFile;
+	if ((logFile = fopen(LOGFILE, "w")) == NULL)
+  	{
+    	printf("'%s': ошибка при открытии лог-файла\n", __FUNCTION__);
+    	exit(1);
+  	}
+
+	/* Загрузка уровня */
 	int **map = NULL;
-	if(!LevelSelect(1, &map))
+	if(!LevelSelect(LEVEL_1, &map))
 	{
-		printf("'%s': Level not loaded\n", __FUNCTION__);
+		fprintf(logFile, "'%s': Level not loaded\n", __FUNCTION__);
 		exit(1);
 	}
-#ifdef DEBUG
 	else
 	{
-		printf("'%s': Level successfully loaded\n", __FUNCTION__);
-		LevelOutput(map);
+		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
+		LevelOutput(map, logFile);
 	}
-#endif
-	Object *Boxs; //массив ящиков
-	Object *Endpoints; //массив эндпоинтов
-	Object Player; //перменная игрока
+
+	/* Инициализация базовых объектов */
+	/* Массив ящиков */
+	Object *Boxs;
+	/* Массив эндпоинтов */
+	Object *Endpoints;
+	/* Перменная игрока */
+	Object Player;
 
 	size_t boxCount;
 	if(!ObjInit(&boxCount, &Boxs, map, BOX_MAP_OBJ))
 	{
-		printf("'%s': Can't initialize object Boxs\n", __FUNCTION__);
+		fprintf(logFile, "'%s': Can't initialize object Boxs\n", __FUNCTION__);
 		exit(1);
 	}
-#ifdef DEBUG
 	else
 	{
-		printf("'%s': Object Boxs successfully initialized\n", __FUNCTION__);
-		for(size_t i = 0; i < boxCount; i++) printf("%d:%d ", Boxs[i].yPos, Boxs[i].xPos);
-		printf("\n");
+		fprintf(logFile, "'%s': Object Boxs successfully initialized\n", __FUNCTION__);
+		for(size_t i = 0; i < boxCount; i++) fprintf(logFile, "%d:%d ", Boxs[i].yPos, Boxs[i].xPos);
+		fprintf(logFile, "\n");
 	}
-#endif
 
 	size_t endpointCount;
 	if(!ObjInit(&endpointCount, &Endpoints, map, ENDPOINT_MAP_OBJ))
 	{
-		printf("'%s': Can't initialize object Endpoints\n", __FUNCTION__);
+		fprintf(logFile, "'%s': Can't initialize object Endpoints\n", __FUNCTION__);
 		exit(1);
 	}
-#ifdef DEBUG
 	else
 	{
-		printf("'%s': Object Endpoints successfully initialized\n", __FUNCTION__);
-		for(size_t i = 0; i < boxCount; i++) printf("%d:%d ", Endpoints[i].yPos, Endpoints[i].xPos);
-		printf("\n");
+		fprintf(logFile, "'%s': Object Endpoints successfully initialized\n", __FUNCTION__);
+		for(size_t i = 0; i < boxCount; i++) fprintf(logFile, "%d:%d ", Endpoints[i].yPos, Endpoints[i].xPos);
+		fprintf(logFile, "\n");
 	}
-#endif
 	if(!PlayerInit(&Player, map, PLAYER_MAP_OBJ))
 	{
-		printf("'%s': Can't initialize object Player\n", __FUNCTION__);
+		fprintf(logFile, "'%s': Can't initialize object Player\n", __FUNCTION__);
 		exit(1);
 	}
-#ifdef DEBUG
 	else
 	{
-		printf("'%s': Object Player successfully initialized\n", __FUNCTION__);
-		printf("%d:%d \n", Player.yPos, Player.xPos);
+		fprintf(logFile, "'%s': Object Player successfully initialized\n", __FUNCTION__);
+		fprintf(logFile, "%d:%d \n", Player.yPos, Player.xPos);
 	}
-#endif
+
+	getch();
+
+	/* Удаление окон */
+    delwin(menuWnd);
+    endwin();
 	return 0;
 }
