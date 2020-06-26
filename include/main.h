@@ -42,3 +42,4 @@ typedef struct
 
 void LevelOutput(int **map); //вывод карты уровня
 bool LevelSelect(int levelNumber, int ***map); //функция выбора уровня из пресета карт
+bool PlayerMove(char* direct, int **map, Object* player);

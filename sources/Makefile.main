@@ -1,7 +1,7 @@
 CFLAGS = -I ../include
 LIBS = -lncurses
 CC = gcc
-SOURCES = main.c LevelOutput.c LevelSelect.c
+SOURCES = main.c LevelOutput.c LevelSelect.c PlayerMove.c
 OBJECTS = $(SOURCES:.c=.o)
 EXECUTABLE =  ../bin/main
 
