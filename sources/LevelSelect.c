@@ -6,15 +6,15 @@ bool LevelSelect(int levelNumber, int ***map)
     //выбор карты уровня
 	switch (levelNumber) 
 	{
-		case 0:
+		case 1:
 		{
-			int mapLevel0[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP0 };
+			int mapLevel0[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP1 };
 			memcpy(mapStart, mapLevel0, sizeof(mapStart));
 			break;
 		}
-		case 1:
+		case 2:
 		{
-			int mapLevel1[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP1 };
+			int mapLevel1[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP2 };
 			memcpy(mapStart, mapLevel1, sizeof(mapStart));
 			break;
 		}

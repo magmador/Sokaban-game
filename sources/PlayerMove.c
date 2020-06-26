@@ -2,7 +2,8 @@
 
 bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints)
 {
-	int tmpDirect = 0; //заменить при отрисовке графики на нажатие клавиши
+	/* Заменить при отрисовке графики на нажатие клавиши */
+	int tmpDirect = 0;
 	if (!strcmp(direct,"up"))
 	{
 		tmpDirect = 1;
@@ -19,6 +20,7 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* 
 	{
 		tmpDirect = 4;
 	}
+	
 	bool win;
 	switch (tmpDirect)
 	{
@@ -60,7 +62,7 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* 
 		}
 		default:
 		{
-			//нажатие любой другой кнопки, помимо кнопок движения должно игнорироваться
+			/* Нажатие любой другой кнопки, помимо кнопок движения должно игнорироваться */
 		}
 	}
 }
