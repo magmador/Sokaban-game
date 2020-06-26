@@ -3,9 +3,9 @@
 bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj)
 {
 	*objCount = 0;
-	for(int row = 0; row < MAP_ROW_COUNT; row++)
+	for(size_t row = 0; row < MAP_ROW_COUNT; row++)
 	{
-		for(int col = 0; col < MAP_COL_COUNT; col++)
+		for(size_t col = 0; col < MAP_COL_COUNT; col++)
 		{
 			if(*objCount == 0 && map[row][col] == obj)
 			{
