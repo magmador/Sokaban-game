@@ -6,6 +6,12 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifndef MAIN_H
+#define MAIN_H 
+
+#define NOT_PL_SPACE_MAP_OBJ -1
+#define WALL_MAP_OBJ 1
+#define SPACE_MAP_OBJ 0
 #define BOX_MAP_OBJ 2
 #define ENDPOINT_MAP_OBJ 3
 #define PLAYER_MAP_OBJ 4
@@ -51,3 +57,6 @@ bool LevelSelect(int levelNumber, int ***map); //функция выбора у�
 bool PlayerMove(char* direct, int **map, Object* player);
 bool LevelSelect(int levelNumber, int ***map); //выбор уровня из пресета карт
 bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj); //инициализация массива объектов (obj - цифра с map, см. define в main.h)
+bool PlayerInit(Object *Player, int **map, int obj);
+
+#endif

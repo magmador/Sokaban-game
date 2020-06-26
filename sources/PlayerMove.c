@@ -7,15 +7,15 @@ bool PlayerMove(char* direct, int **map, Object* player)
 	{
 		tmpDirect = 1;
 	}
-		if (!strcmp(direct,"down"))
+	else if (!strcmp(direct,"down"))
 	{
 		tmpDirect = 2;
 	}
-		if (!strcmp(direct,"left"))
+	else if (!strcmp(direct,"left"))
 	{
 		tmpDirect = 3;
 	}
-		if (!strcmp(direct,"right"))
+	else if (!strcmp(direct,"right"))
 	{
 		tmpDirect = 4;
 	}

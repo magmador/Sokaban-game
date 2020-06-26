@@ -24,7 +24,7 @@ bool LevelSelect(int levelNumber, int ***map)
     //загрузка карты в map
 	*map = (int **)malloc(ROW_MAP_SIZE);
 	if (*map == NULL) return false;
-	for(int row = 0; row < MAP_ROW_COUNT; row++)
+	for(size_t row = 0; row < MAP_ROW_COUNT; row++)
 	{
 		(*map)[row] = (int *)malloc(COL_MAP_SIZE); //выделение памяти под строку
 		memcpy((*map)[row], mapStart[row], COL_MAP_SIZE);
