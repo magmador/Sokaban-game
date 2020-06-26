@@ -35,7 +35,7 @@ int main()
 #endif
 
 	size_t endpointCount;
-	if(!ObjInit(&endpointCount, &Endpoints, map, BOX_MAP_OBJ))
+	if(!ObjInit(&endpointCount, &Endpoints, map, ENDPOINT_MAP_OBJ))
 	{
 		printf("'%s': Can't initialize object Endpoints\n", __FUNCTION__);
 		exit(1);
@@ -59,6 +59,19 @@ int main()
 		printf("'%s': Object Player successfully initialized\n", __FUNCTION__);
 		printf("%d:%d \n", Player.yPos, Player.xPos);
 	}
-#endif	
+#endif
+	if (!PlayerMove("right", map, &Player, boxCount, Boxs, endpointCount, Endpoints))
+	{
+		printf("'%s': Can't move in selected direction\n", __FUNCTION__);
+	}
+#ifdef DEBUG
+	else
+	{
+		PlayerMove("up", map, &Player, boxCount, Boxs, endpointCount, Endpoints);
+		printf("'%s': Moving right, then up.\n", __FUNCTION__);
+		LevelOutput(map);
+	}
+#endif
+
 	return 0;
 }

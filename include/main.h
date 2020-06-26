@@ -54,7 +54,7 @@ typedef struct
 
 void LevelOutput(int **map); //вывод карты уровня
 bool LevelSelect(int levelNumber, int ***map); //функция выбора уровня из пресета карт
-bool PlayerMove(char* direct, int **map, Object* player);
+bool PlayerMove(char* direct, int **map, Object* player, size_t oCount, Object* boxs, size_t eCount, Object* endpoints); //функция передвижения персонажа
 bool LevelSelect(int levelNumber, int ***map); //выбор уровня из пресета карт
 bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj); //инициализация массива объектов (obj - цифра с map, см. define в main.h)
 bool PlayerInit(Object *Player, int **map, int obj);
