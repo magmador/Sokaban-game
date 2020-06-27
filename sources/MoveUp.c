@@ -38,6 +38,14 @@ bool MoveUp(int **map, Object* player, size_t bCount, Object* boxs, size_t eCoun
 		else
 		{
 			map[player -> yPos][player -> xPos] = SPACE_MAP_OBJ;
+			for (int i = 0; i < eCount; i++) //Проверка стоит ли игрок на endpoint-е до передвижения
+			{
+				if (endpoints[i].xPos == player -> xPos && endpoints[i].yPos == player -> yPos) 
+				{
+					map[player -> yPos][player -> xPos] = ENDPOINT_MAP_OBJ;
+					break;
+				}
+			}
 			player -> yPos--;
 			map[player -> yPos][player -> xPos] = PLAYER_MAP_OBJ;
 			return true;
