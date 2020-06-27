@@ -1,7 +1,7 @@
 #include "main.h"
 
-void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move)
-{        
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, int count)
+{        	
         lvlWnd = newwin(MAP_ROW_COUNT, MAP_COL_COUNT, MENU_Y, MENU_X);
         
         init_pair(1, COLOR_WHITE, COLOR_BLACK);
@@ -46,4 +46,10 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move)
 		}
 		fprintf(logFile, "\n");
 	}
+	move(MAP_ROW_COUNT + 1, MAP_COL_COUNT - 5);
+	printw("R - restart level");
+	move(MAP_ROW_COUNT + 2, MAP_COL_COUNT - 5);
+	printw("Q - exit");
+	move(MAP_ROW_COUNT + 3, MAP_COL_COUNT - 5);
+	printw("Counts:%d", count);
 }

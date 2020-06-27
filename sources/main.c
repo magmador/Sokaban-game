@@ -16,6 +16,7 @@ int main()
 	DrawMenu(menuWnd); 
 	PickMenu(menuWnd);
 	   
+	size_t count = 0;//счетчик ходов - пока здесь
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
 	FILE *logFile;
 	if ((logFile = fopen(LOGFILE, "w")) == NULL)
@@ -34,7 +35,7 @@ int main()
 	else
 	{
 		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
-		LevelOutput(lvlWnd, map, logFile, ACS_UARROW);
+		LevelOutput(lvlWnd, map, logFile, UP_MOVE, count);
 	}
 
 	/* Инициализация базовых объектов */

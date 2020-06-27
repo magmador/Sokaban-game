@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool PlayerMove(WINDOW *lvlWnd, char* direct, int **map, Object* player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints, FILE *logFile)
+bool PlayerMove(WINDOW *lvlWnd, char* direct, int **map, Object* player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints, FILE *logFile, size_t count)
 {
 	/* Заменить при отрисовке графики на нажатие клавиши */
 	/*int tmpDirect = 0;
@@ -20,55 +20,60 @@ bool PlayerMove(WINDOW *lvlWnd, char* direct, int **map, Object* player, size_t 
 	{
 		tmpDirect = 4;
 	}*/
-	
-	int ch = wgetch(lvlWnd);//считывание клавиши с окна уровня
+	int ch;
 	bool win;
-	switch(ch)
-	//switch (tmpDirect)
+	
+	while(1)
 	{
-		case KEY_UP:
+        	ch = wgetch(lvlWnd/*stdscr*/);//считывание клавиши с окна уровня
+        	//ch = getchar(); - альтернативный способ считывания
+		switch(ch)
+	//switch (tmpDirect)
 		{
-			if (MoveUp(map, player, bCount, Boxs, eCount, Endpoints))
+			case KEY_UP://65 - код стрелки вверх:
 			{
-			        LevelOutput(lvlWnd, map, logFile, UP_MOVE);
-				if(win = Winable(Boxs, Endpoints, bCount, eCount))
-				return win;
+				if (MoveUp(map, player, bCount, Boxs, eCount, Endpoints))
+				{
+					LevelOutput(lvlWnd, map, logFile, UP_MOVE, count);
+					if(win = Winable(Boxs, Endpoints, bCount, eCount))
+					return win;
+				}
+				break;
 			}
-			break;
-		}
-		case KEY_DOWN:
-		{
-			if(MoveDown(map, player, bCount, Boxs, eCount, Endpoints))
+			case KEY_DOWN://66:
 			{
-				LevelOutput(lvlWnd, map, logFile, DOWN_MOVE);
-				if(win = Winable(Boxs, Endpoints, bCount, eCount))
-				return win;
+				if(MoveDown(map, player, bCount, Boxs, eCount, Endpoints))
+				{
+					LevelOutput(lvlWnd, map, logFile, DOWN_MOVE, count);
+					if(win = Winable(Boxs, Endpoints, bCount, eCount))
+					return win;
+				}
+				break;
 			}
-			break;
-		}
-		case KEY_LEFT:
-		{
-			if(MoveLeft(map, player, bCount, Boxs, eCount, Endpoints))
+			case KEY_LEFT://68:
 			{
-				LevelOutput(lvlWnd, map, logFile, LEFT_MOVE);
-				if(win = Winable(Boxs, Endpoints, bCount, eCount))
-				return win;
+				if(MoveLeft(map, player, bCount, Boxs, eCount, Endpoints))
+				{
+					LevelOutput(lvlWnd, map, logFile, LEFT_MOVE, count);
+					if(win = Winable(Boxs, Endpoints, bCount, eCount))
+					return win;
+				}
+				break;
 			}
-			break;
-		}
-		case KEY_RIGHT:
-		{
-			if(MoveRight(map, player, bCount, Boxs, eCount, Endpoints))
+			case KEY_RIGHT://67:
 			{
-				LevelOutput(lvlWnd, map, logFile, RIGHT_MOVE);
-				if(win = Winable(Boxs, Endpoints, bCount, eCount))
-				return win;
+				if(MoveRight(map, player, bCount, Boxs, eCount, Endpoints))
+				{
+					LevelOutput(lvlWnd, map, logFile, RIGHT_MOVE, count);
+					if(win = Winable(Boxs, Endpoints, bCount, eCount))
+					return win;
+				}
+				break;
 			}
-			break;
-		}
-		default:
-		{
-			/* Нажатие любой другой кнопки, помимо кнопок движения должно игнорироваться */
+			default:
+			{
+				/* Нажатие любой другой кнопки, помимо кнопок движения должно игнорироваться */
+			}
 		}
 	}
 }
