@@ -1,6 +1,6 @@
 #include "main.h"
 
-void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, int count)
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count)
 {        	
         lvlWnd = newwin(MAP_ROW_COUNT, MAP_COL_COUNT, MENU_Y, MENU_X);
         
