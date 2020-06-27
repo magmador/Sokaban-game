@@ -49,14 +49,36 @@ int main()
 	Object Player;
 	/* Количество ящиков и эндпоинтов*/
 	size_t boxCount, endpointCount;
-	ObjectInitialization(boxCount, &Boxs, logFile, endpointCount, &Endpoints, map, &Player);	
+	ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, map, &Player);	
 
+	bool restart = false;
 	do
 	{
-		PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount);
+		if(PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart)) 
+		{
+			printf("WIN"); 
+			break;
+		}
+		if(restart)
+		{
+			if(!LevelSelect(LEVEL_1, &map))
+			{
+				fprintf(logFile, "'%s': Level not loaded\n", __FUNCTION__);
+				exit(1);
+			}
+			else
+			{
+				fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
+				LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
+			}
+			ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, map, &Player);
+			LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
+			restart = false;
+		}
 	}while(1);
 
 	/* Удаление окон */
+	getch();
     delwin(menuWnd);
     endwin();
         
