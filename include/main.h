@@ -68,7 +68,7 @@ typedef struct
    } Object;
 
 /* Вывод карты уровня */
-void LevelOutput(int **map, FILE *logFile);
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile);
 /* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Функция передвижения персонажа */

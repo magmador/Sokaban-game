@@ -4,16 +4,22 @@ int main()
 {
 	/* Блок инициализации ncurses */
 	initscr();
-    cbreak();
-    curs_set(FALSE);
-    noecho();
-    start_color();
-    refresh();
+        cbreak();
+        curs_set(FALSE);
+        noecho();
+        start_color();
+        refresh();
 
 	/* Отрисовка меню */
 	WINDOW *menuWnd;
+	WINDOW *lvlWnd;
 	DrawMenu(menuWnd);
-	
+        
+        getch();
+        delwin(menuWnd);
+        clear();
+        refresh();
+        
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
 	FILE *logFile;
 	if ((logFile = fopen(LOGFILE, "w")) == NULL)
@@ -21,7 +27,7 @@ int main()
     	printf("'%s': ошибка при открытии лог-файла\n", __FUNCTION__);
     	exit(1);
   	}
-
+      
 	/* Загрузка уровня */
 	int **map = NULL;
 	if(!LevelSelect(LEVEL_1, &map))
@@ -32,7 +38,7 @@ int main()
 	else
 	{
 		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
-		LevelOutput(map, logFile);
+		LevelOutput(lvlWnd, map, logFile);
 	}
 
 	/* Инициализация базовых объектов */
@@ -82,7 +88,8 @@ int main()
 	getch();
 
 	/* Удаление окон */
-    delwin(menuWnd);
-    endwin();
+        //delwin(menuWnd);
+        endwin();
+        
 	return 0;
 }
