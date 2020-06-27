@@ -61,7 +61,7 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object* Player, size_t bCount, Object
 			free(Boxs);
 			free(Endpoints);
 		    turnCount = 0;
-			ObjectInitialization(bCount, Boxs, logFile, eCount, Endpoints, map, *Player);	
+			//ObjectInitialization(bCount, Boxs, logFile, eCount, Endpoints, map, Player);	
 			LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
 		    break;
 		case 'q':

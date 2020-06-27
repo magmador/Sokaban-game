@@ -10,7 +10,7 @@ bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj)
 			if(*objCount == 0 && map[row][col] == obj)
 			{
 				(*objCount)++;
-				*Objs = (Object *)malloc(*objCount * sizeof(Object *));
+				*Objs = (Object *)malloc(*objCount * sizeof(Object));
 				(*Objs)[(*objCount)-1].yPos = row;
 				(*Objs)[(*objCount)-1].xPos = col;
 			}
