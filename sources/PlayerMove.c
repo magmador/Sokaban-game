@@ -58,49 +58,11 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object* Player, size_t bCount, Object
 		}
 		case 'R':
 		case 'r':
+			free(Boxs);
+			free(Endpoints);
 		    turnCount = 0;
-		    if(!LevelSelect(LEVEL_1, &map))
-			{
-				fprintf(logFile, "'%s': Restart Level not loaded\n", __FUNCTION__);
-				exit(1);
-			}
-			else
-			{
-				fprintf(logFile, "'%s': Restart Level successfully loaded\n", __FUNCTION__);
-			}
-			if(!ObjInit(&bCount, &Boxs, map, BOX_MAP_OBJ))
-			{
-				fprintf(logFile, "'%s': Can't Restart initialize object Boxs\n", __FUNCTION__);
-				exit(1);
-			}
-			else
-			{
-				fprintf(logFile, "'%s': Restart Object Boxs successfully initialized\n", __FUNCTION__);
-				for(size_t i = 0; i < bCount; i++) fprintf(logFile, "%d:%d ", Boxs[i].yPos, Boxs[i].xPos);
-				fprintf(logFile, "\n");
-			}
-			if(!ObjInit(&eCount, &Endpoints, map, ENDPOINT_MAP_OBJ))
-			{
-				fprintf(logFile, "'%s': Can't Restart initialize object Endpoints\n", __FUNCTION__);
-				exit(1);
-			}
-			else
-			{
-				fprintf(logFile, "'%s': Restart Object Endpoints successfully initialized\n", __FUNCTION__);
-				for(size_t i = 0; i < bCount; i++) fprintf(logFile, "%d:%d ", Endpoints[i].yPos, Endpoints[i].xPos);
-				fprintf(logFile, "\n");
-			}
-			if(!PlayerInit(Player, map, PLAYER_MAP_OBJ))
-			{
-				fprintf(logFile, "'%s': Can't Restart initialize object Player\n", __FUNCTION__);
-				exit(1);
-			}
-			else
-			{
-				fprintf(logFile, "'%s': Restart Object Player successfully initialized\n", __FUNCTION__);
-				fprintf(logFile, "%d:%d \n", Player->yPos, Player->xPos);
-			}
-		        LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
+			ObjectInitialization(bCount, Boxs, logFile, eCount, Endpoints, map, *Player);	
+			LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
 		    break;
 		case 'q':
 		{

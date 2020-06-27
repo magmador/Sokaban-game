@@ -49,6 +49,7 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 		}
 		fprintf(logFile, "\n");
 	}
+	fprintf(logFile, "\n");
 	move(MAP_ROW_COUNT + 1, MAP_COL_COUNT - 5);
 	printw("R - restart level");
 	move(MAP_ROW_COUNT + 2, MAP_COL_COUNT - 5);

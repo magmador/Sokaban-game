@@ -103,5 +103,7 @@ bool Winable(Object *Boxs, Object *Endpoints, size_t bCount, size_t eCount);
 void DrawMenu(WINDOW *menuWnd); 
 /* Выбор пунктов в меню */
 void PickMenu(WINDOW *menuWnd); 
+/* Инициализация объектов */
+void ObjectInitialization(size_t boxCount, Object *Boxs, FILE *logFile, size_t endpointCount, Object *Endpoints, int **map, Object Player);
 
 #endif
