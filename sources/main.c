@@ -49,7 +49,7 @@ int main()
 	Object Player;
 	/* Количество ящиков и эндпоинтов*/
 	size_t boxCount, endpointCount;
-	ObjectInitialization(boxCount, Boxs, logFile, endpointCount, Endpoints, map, Player);	
+	ObjectInitialization(boxCount, &Boxs, logFile, endpointCount, &Endpoints, map, &Player);	
 
 	do
 	{

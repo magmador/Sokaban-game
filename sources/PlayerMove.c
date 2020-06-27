@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool PlayerMove(WINDOW *lvlWnd, int **map, Object* Player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints, FILE *logFile, size_t turnCount)
+bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints, FILE *logFile, size_t turnCount)
 {
 	int mapStart[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP1 };
 	bool win;
@@ -61,7 +61,7 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object* Player, size_t bCount, Object
 			free(Boxs);
 			free(Endpoints);
 		    turnCount = 0;
-			ObjectInitialization(bCount, Boxs, logFile, eCount, Endpoints, map, *Player);	
+			ObjectInitialization(bCount, Boxs, logFile, eCount, Endpoints, map, Player);
 			LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
 		    break;
 		case 'q':
