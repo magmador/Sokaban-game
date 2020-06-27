@@ -82,6 +82,10 @@ int main()
 		fprintf(logFile, "%d:%d \n", Player.yPos, Player.xPos);
 	}
 
+	while(1)
+	{
+		PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, count);
+	}
 	getch();
 
 	/* Удаление окон */

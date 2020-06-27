@@ -77,7 +77,7 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 /* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Функция передвижения персонажа */
-bool PlayerMove(WINDOW *lvlWnd, char* direct, int **map, Object* player, size_t oCount, Object* boxs, size_t eCount, Object* endpoints, FILE *logFile, size_t count);
+bool PlayerMove(WINDOW *lvlWnd, int **map, Object* player, size_t oCount, Object* boxs, size_t eCount, Object* endpoints, FILE *logFile, size_t count);
 /* Выбор уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Инициализация массива объектов */

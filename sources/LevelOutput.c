@@ -40,8 +40,6 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
                            default:
                                 break;
 		        }
-		        wrefresh(lvlWnd);
-	                refresh();
 			fprintf(logFile, "%2d ", map[row][col]);
 		}
 		fprintf(logFile, "\n");
@@ -52,4 +50,6 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 	printw("Q - exit");
 	move(MAP_ROW_COUNT + 3, MAP_COL_COUNT - 5);
 	printw("Counts:%d", count);
+	wrefresh(lvlWnd);
+	refresh();
 }
