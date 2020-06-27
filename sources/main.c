@@ -13,13 +13,9 @@ int main()
 	/* Отрисовка меню */
 	WINDOW *menuWnd;
 	WINDOW *lvlWnd;
-	DrawMenu(menuWnd);
-        
-        getch();
-        delwin(menuWnd);
-        clear();
-        refresh();
-        
+	DrawMenu(menuWnd); 
+	PickMenu(menuWnd);
+	   
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
 	FILE *logFile;
 	if ((logFile = fopen(LOGFILE, "w")) == NULL)
@@ -88,7 +84,7 @@ int main()
 	getch();
 
 	/* Удаление окон */
-        //delwin(menuWnd);
+        delwin(menuWnd);
         endwin();
         
 	return 0;

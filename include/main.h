@@ -91,4 +91,7 @@ bool MoveRight(int **map, Object* player, size_t bCount, Object* boxs, size_t eC
 bool Winable(Object *Boxs, Object *Endpoints, size_t bCount, size_t eCount);  
 /* Отрисовка меню */
 void DrawMenu(WINDOW *menuWnd); 
+/* Выбор пунктов в меню */
+void PickMenu(WINDOW *menuWnd); 
+
 #endif
