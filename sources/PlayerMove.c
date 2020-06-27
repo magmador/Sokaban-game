@@ -1,9 +1,9 @@
 #include "main.h"
 
-bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints)
+bool PlayerMove(WINDOW *lvlWnd, char* direct, int **map, Object* player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints, FILE *logFile)
 {
 	/* Заменить при отрисовке графики на нажатие клавиши */
-	int tmpDirect = 0;
+	/*int tmpDirect = 0;
 	if (!strcmp(direct,"up"))
 	{
 		tmpDirect = 1;
@@ -19,42 +19,48 @@ bool PlayerMove(char* direct, int **map, Object* player, size_t bCount, Object* 
 	else if (!strcmp(direct,"right"))
 	{
 		tmpDirect = 4;
-	}
+	}*/
 	
+	int ch = wgetch(lvlWnd);//считывание клавиши с окна уровня
 	bool win;
-	switch (tmpDirect)
+	switch(ch)
+	//switch (tmpDirect)
 	{
-		case 1:
+		case KEY_UP:
 		{
 			if (MoveUp(map, player, bCount, Boxs, eCount, Endpoints))
 			{
+			        LevelOutput(lvlWnd, map, logFile, UP_MOVE);
 				if(win = Winable(Boxs, Endpoints, bCount, eCount))
 				return win;
 			}
 			break;
 		}
-		case 2:
+		case KEY_DOWN:
 		{
 			if(MoveDown(map, player, bCount, Boxs, eCount, Endpoints))
 			{
+				LevelOutput(lvlWnd, map, logFile, DOWN_MOVE);
 				if(win = Winable(Boxs, Endpoints, bCount, eCount))
 				return win;
 			}
 			break;
 		}
-		case 3:
+		case KEY_LEFT:
 		{
 			if(MoveLeft(map, player, bCount, Boxs, eCount, Endpoints))
 			{
+				LevelOutput(lvlWnd, map, logFile, LEFT_MOVE);
 				if(win = Winable(Boxs, Endpoints, bCount, eCount))
 				return win;
 			}
 			break;
 		}
-		case 4:
+		case KEY_RIGHT:
 		{
 			if(MoveRight(map, player, bCount, Boxs, eCount, Endpoints))
 			{
+				LevelOutput(lvlWnd, map, logFile, RIGHT_MOVE);
 				if(win = Winable(Boxs, Endpoints, bCount, eCount))
 				return win;
 			}

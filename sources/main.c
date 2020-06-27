@@ -34,7 +34,7 @@ int main()
 	else
 	{
 		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
-		LevelOutput(lvlWnd, map, logFile);
+		LevelOutput(lvlWnd, map, logFile, ACS_UARROW);
 	}
 
 	/* Инициализация базовых объектов */

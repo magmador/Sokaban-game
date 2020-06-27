@@ -33,6 +33,11 @@
 #define ROW_MAP_SIZE  MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE  MAP_COL_COUNT * sizeof(int)
 
+#define UP_MOVE ACS_UARROW
+#define DOWN_MOVE ACS_DARROW
+#define LEFT_MOVE ACS_LARROW
+#define RIGHT_MOVE ACS_RARROW
+
 #define LEVEL_1 1
 #define MAP1 \
 	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}, \
@@ -68,11 +73,11 @@ typedef struct
    } Object;
 
 /* Вывод карты уровня */
-void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile);
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move);
 /* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Функция передвижения персонажа */
-bool PlayerMove(char* direct, int **map, Object* player, size_t oCount, Object* boxs, size_t eCount, Object* endpoints);
+bool PlayerMove(WINDOW *lvlWnd, char* direct, int **map, Object* player, size_t oCount, Object* boxs, size_t eCount, Object* endpoints, FILE *logFile);
 /* Выбор уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Инициализация массива объектов */

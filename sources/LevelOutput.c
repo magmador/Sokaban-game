@@ -1,6 +1,6 @@
 #include "main.h"
 
-void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile)
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move)
 {        
         lvlWnd = newwin(MAP_ROW_COUNT, MAP_COL_COUNT, MENU_Y, MENU_X);
         
@@ -35,7 +35,7 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile)
 		                break;
 		            case 4:
 		                wattron(lvlWnd, COLOR_PAIR(4));
-		                mvwaddch(lvlWnd, row, col, ACS_UARROW);
+		                mvwaddch(lvlWnd, row, col, move);
 		                break;
                            default:
                                 break;
