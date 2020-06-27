@@ -4,19 +4,21 @@ int main()
 {
 	/* Блок инициализации ncurses */
 	initscr();
-        cbreak();
-        curs_set(FALSE);
-        noecho();
-        start_color();
-        refresh();
+    cbreak();
+    curs_set(FALSE);
+	keypad(stdscr, TRUE);
+    noecho();
+    start_color();
+    refresh();
 
 	/* Отрисовка меню */
 	WINDOW *menuWnd;
 	WINDOW *lvlWnd;
 	DrawMenu(menuWnd); 
 	PickMenu(menuWnd);
+
 	   
-	size_t count = 0;//счетчик ходов - пока здесь
+	size_t turnCount = 0;//счетчик ходов - пока здесь
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
 	FILE *logFile;
 	if ((logFile = fopen(LOGFILE, "w")) == NULL)
@@ -35,7 +37,7 @@ int main()
 	else
 	{
 		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
-		LevelOutput(lvlWnd, map, logFile, UP_MOVE, count);
+		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
 	}
 
 	/* Инициализация базовых объектов */
@@ -82,15 +84,14 @@ int main()
 		fprintf(logFile, "%d:%d \n", Player.yPos, Player.xPos);
 	}
 
-	while(1)
+	do
 	{
-		PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, count);
-	}
-	getch();
+		PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount);
+	}while(1);
 
 	/* Удаление окон */
-        delwin(menuWnd);
-        endwin();
+    delwin(menuWnd);
+    endwin();
         
 	return 0;
 }

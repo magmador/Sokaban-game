@@ -11,6 +11,11 @@
 
 #define LOGFILE    "./log/sokaban.log"
 
+#define KEY_ARROW_UP 	65
+#define KEY_ARROW_DOWN 	66
+#define KEY_ARROW_LEFT	68
+#define KEY_ARROW_RIGHT 67
+
 #define MENU_COLS  50
 #define MENU_ROWS  25
 #define MENU_X	   5
@@ -22,8 +27,8 @@
 
 
 #define NOT_PL_SPACE_MAP_OBJ -1
-#define WALL_MAP_OBJ 		  1
 #define SPACE_MAP_OBJ 		  0
+#define WALL_MAP_OBJ 		  1
 #define BOX_MAP_OBJ 		  2
 #define ENDPOINT_MAP_OBJ 	  3
 #define PLAYER_MAP_OBJ 		  4
