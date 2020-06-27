@@ -106,4 +106,5 @@ void PickMenu(WINDOW *menuWnd);
 /* Инициализация объектов */
 void ObjectInitialization(size_t boxCount, Object **Boxs, FILE *logFile, size_t endpointCount, Object **Endpoints, int **map, Object *Player);
 
+
 #endif

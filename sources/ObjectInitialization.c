@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 void ObjectInitialization(size_t boxCount, Object **Boxs, FILE *logFile, size_t endpointCount, Object **Endpoints, int **map, Object *Player)
 {
 	if(!ObjInit(&boxCount, Boxs, map, BOX_MAP_OBJ))
