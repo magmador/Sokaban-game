@@ -27,18 +27,6 @@ int main()
     	exit(1);
   	}
       
-	/* Загрузка уровня */
-	int **map = NULL;
-	if(!LevelSelect(LEVEL_1, &map))
-	{
-		fprintf(logFile, "'%s': Level not loaded\n", __FUNCTION__);
-		exit(1);
-	}
-	else
-	{
-		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
-		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
-	}
 
 	/* Инициализация базовых объектов */
 	/* Массив ящиков */
@@ -49,36 +37,38 @@ int main()
 	Object Player;
 	/* Количество ящиков и эндпоинтов*/
 	size_t boxCount, endpointCount;
-	ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, map, &Player);	
 
+	/* Загрузка уровня */
+	int **map = NULL;
+	int Levels[] = { LEVEL_1, LEVEL_2 };
 	bool restart = false;
-	do
+	for(int levelCur = 0; levelCur < (sizeof(Levels)/sizeof(int)); levelCur++)
 	{
-		if(PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart)) 
+		ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);	
+		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
+
+		do
 		{
-			printf("WIN"); 
-			break;
-		}
-		if(restart)
-		{
-			if(!LevelSelect(LEVEL_1, &map))
+			if(PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart)) 
 			{
-				fprintf(logFile, "'%s': Level not loaded\n", __FUNCTION__);
-				exit(1);
+				/* Добавить сообщение о победе */
+				printf("\nWIN\n"); 
+				break;
 			}
-			else
+			if(restart)
 			{
-				fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
+				turnCount = 0;
+				ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
 				LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
+				restart = false;
 			}
-			ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, map, &Player);
-			LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
-			restart = false;
-		}
-	}while(1);
+		}while(1);
+
+		/* Написать PRESS ANY KEY TO CONTINUE */
+		getch();
+	}
 
 	/* Удаление окон */
-	getch();
     delwin(menuWnd);
     endwin();
         

@@ -5,25 +5,33 @@
      int ch = getchar();
      switch(ch)
      {
-         case 's':
-             delwin(menuWnd);
-             clear();
-             refresh();  
-	     break; 
-	case 'm':
+        case 's':
+        {
+            delwin(menuWnd);
+            clear();
+            refresh();  
+	        break; 
+        }
+    	case 'm':
+        {
             DrawMenu(menuWnd);
             getch();
-	    break; 
-	case 'q':
-	    delwin(menuWnd);
-	    clear();
-	    refresh(); 
-	    endwin();
-	    exit(1); 
-	    break; 
-	default:
+            break; 
+        }
+        case 'q':
+        {
+            delwin(menuWnd);
+            clear();
+            refresh(); 
+            endwin();
+            exit(1); 
+            break; 
+        }
+        default:
+        {
             DrawMenu(menuWnd);
             getch();
-            break;        
-      }
+            break;  
+        }      
+    }
 }

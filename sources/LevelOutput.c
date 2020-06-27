@@ -2,7 +2,7 @@
 
 void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count)
 {        	
-	lvlWnd = newwin(MAP_ROW_COUNT + 5, MAP_COL_COUNT + 5, MENU_Y, MENU_X); 
+	lvlWnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X); 
 	
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
     init_pair(2, COLOR_MAGENTA, COLOR_BLACK);

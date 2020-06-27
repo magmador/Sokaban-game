@@ -38,6 +38,9 @@
 #define ROW_MAP_SIZE  MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE  MAP_COL_COUNT * sizeof(int)
 
+#define LVL_WIN_COLS MAP_COL_COUNT + 5
+#define LVL_WIN_ROWS MAP_ROW_COUNT + 5
+
 #define UP_MOVE ACS_UARROW
 #define DOWN_MOVE ACS_DARROW
 #define LEFT_MOVE ACS_LARROW
@@ -104,7 +107,7 @@ void DrawMenu(WINDOW *menuWnd);
 /* Выбор пунктов в меню */
 void PickMenu(WINDOW *menuWnd); 
 /* Инициализация объектов */
-void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int **map, Object *Player);
+void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int ***map, Object *Player, int lvlNumber, size_t *turnCount);
 
 
 #endif
