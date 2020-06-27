@@ -18,6 +18,12 @@ bool LevelSelect(int levelNumber, int ***map)
 			memcpy(mapStart, mapLevel1, sizeof(mapStart));
 			break;
 		}
+		case LEVEL_3:
+		{
+			int mapLevel3[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP3 };
+			memcpy(mapStart, mapLevel3, sizeof(mapStart));
+			break;
+		}
 		default:
 			return false;
 	}

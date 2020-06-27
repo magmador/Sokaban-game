@@ -40,8 +40,9 @@ int main()
 
 	/* Загрузка уровня */
 	int **map = NULL;
-	int Levels[] = { LEVEL_1, LEVEL_2 };
+	int Levels[] = { LEVEL_1, LEVEL_2, LEVEL_3 };
 	bool restart = false;
+	init_pair(5, COLOR_WHITE, COLOR_BLUE);
 	for(int levelCur = 0; levelCur < (sizeof(Levels)/sizeof(int)); levelCur++)
 	{
 		ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);	
@@ -51,8 +52,8 @@ int main()
 		{
 			if(PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart)) 
 			{
-				/* Добавить сообщение о победе */
-				printf("\nWIN\n"); 
+				attron(COLOR_PAIR(5));
+				mvwprintw(stdscr,MAP_ROW_COUNT + 4, MAP_COL_COUNT - 4, LVL_CLEAR);
 				break;
 			}
 			if(restart)
@@ -64,7 +65,9 @@ int main()
 			}
 		}while(1);
 
-		/* Написать PRESS ANY KEY TO CONTINUE */
+		attron(COLOR_PAIR(5));
+		mvwprintw(stdscr,MAP_ROW_COUNT + 5, MAP_COL_COUNT - 4, PRESS_KEY);
+		refresh();
 		getch();
 	}
 

@@ -24,7 +24,8 @@
 #define MENU_SIN   "PRESS 'S' FOR NEW SINGLE GAME"
 #define MENU_MULTI "PRESS 'M' FOR MULTIPLAYER"
 #define MENU_EXIT  "PRESS 'Q' FOR EXIT"
-
+#define LVL_CLEAR  "LEVEL CLEAR!"
+#define PRESS_KEY  "PRESS ANY KEY..."
 
 #define NOT_PL_SPACE_MAP_OBJ -1
 #define SPACE_MAP_OBJ 		  0
@@ -38,7 +39,7 @@
 #define ROW_MAP_SIZE  MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE  MAP_COL_COUNT * sizeof(int)
 
-#define LVL_WIN_COLS MAP_COL_COUNT + 5
+#define LVL_WIN_COLS MAP_COL_COUNT + 10
 #define LVL_WIN_ROWS MAP_ROW_COUNT + 5
 
 #define UP_MOVE ACS_UARROW
@@ -71,6 +72,19 @@
 	{-1, 1, 1, 1, 1, 1, 1, 1, 1,-1}, \
 	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}, \
 	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}
+
+#define LEVEL_3 3
+#define MAP3 \
+	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}, \
+	{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1}, \
+	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, \
+	{ 1, 1, 1, 1, 1, 3, 1, 1, 1, 1}, \
+	{ 1, 1, 1, 1, 0, 2, 1, 1, 1, 1}, \
+	{ 1, 1, 1, 1, 0, 0, 0, 2, 4, 1}, \
+	{ 1, 1, 1, 3, 0, 2, 2, 3, 1, 1}, \
+	{ 1, 1, 1, 1, 1, 1, 0, 1, 1, 1}, \
+	{ 1, 1, 1, 1, 1, 1, 3, 1, 1, 1}, \
+	{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 
 /* Стурктура игрового объекта */
 typedef struct

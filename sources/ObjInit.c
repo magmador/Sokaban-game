@@ -17,7 +17,7 @@ bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj)
 			else if (map[row][col] == obj)
 			{
 				(*objCount)++;
-				*Objs = (Object *)realloc(*Objs, *objCount*sizeof(*Objs));
+				*Objs = (Object *)realloc(*Objs, (*objCount) * sizeof(Object));
 				(*Objs)[(*objCount)-1].yPos = row;
 				(*Objs)[(*objCount)-1].xPos = col;
 			}
