@@ -27,6 +27,7 @@ bool LevelSelect(int levelNumber, int ***map)
 		default:
 			return false;
 	}
+	
     //загрузка карты в map
 	*map = (int **)malloc(ROW_MAP_SIZE);
 	if (*map == NULL) return false;
