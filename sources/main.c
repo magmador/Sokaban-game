@@ -14,8 +14,8 @@ int main()
 	/* Отрисовка меню */
 	WINDOW *menuWnd;
 	WINDOW *lvlWnd;
-	DrawMenu(menuWnd); 
-	PickMenu(menuWnd);
+//	DrawMenu(menuWnd); 
+//	PickMenu(menuWnd);
 
 	   
 	size_t turnCount = 0;//счетчик ходов - пока здесь
@@ -26,7 +26,13 @@ int main()
     	printf("'%s': ошибка при открытии лог-файла\n", __FUNCTION__);
     	exit(1);
   	}
-      
+ 
+    int socket_fd = 0;
+    if (!NetworkInit(&socket_fd, true, logFile))
+    {
+    	fprintf(logFile, "'%s': Can't initialize socket\n", __FUNCTION__);
+    	exit(1);
+   	}     
 
 	/* Инициализация базовых объектов */
 	/* Массив ящиков */

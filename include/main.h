@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
 
 #ifndef MAIN_H
 #define MAIN_H 
@@ -26,6 +29,8 @@
 #define MENU_EXIT  "PRESS 'Q' FOR EXIT"
 #define LVL_CLEAR  "LEVEL CLEAR!"
 #define PRESS_KEY  "PRESS ANY KEY..."
+#define MSG_FROM_CLIENT "CONNECT"
+#define MSG_TO_CLIENT "SUCCESS"
 
 #define NOT_PL_SPACE_MAP_OBJ -1
 #define SPACE_MAP_OBJ 		  0
@@ -46,6 +51,9 @@
 #define DOWN_MOVE ACS_DARROW
 #define LEFT_MOVE ACS_LARROW
 #define RIGHT_MOVE ACS_RARROW
+
+#define SERVER_PORT 2222
+#define CLIENT_PORT 2223
 
 #define LEVEL_1 1
 #define MAP1 \
@@ -122,6 +130,7 @@ void DrawMenu(WINDOW *menuWnd);
 void PickMenu(WINDOW *menuWnd); 
 /* Инициализация объектов */
 void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int ***map, Object *Player, int lvlNumber, size_t *turnCount);
-
+bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile);
+bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, FILE *logFile);
 
 #endif
