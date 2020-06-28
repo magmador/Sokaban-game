@@ -26,10 +26,17 @@
 #define MENU_X	   5
 #define MENU_Y	   2
 #define MENU_X_OPPONENT	   35
+#define MULTI_MENU_COLS 20
+#define MULTI_MENU_ROWS 10
+#define MULTI_MENU_Y 5
+#define MULTI_MENU_X 2
 #define MENU_TITLE "SOKABAN THE GAME"
 #define MENU_SIN   "PRESS 'S' FOR NEW SINGLE GAME"
 #define MENU_MULTI "PRESS 'M' FOR MULTIPLAYER"
 #define MENU_EXIT  "PRESS 'Q' FOR EXIT"
+#define MULTI_MENU_TITLE "CHOOSE YOUR SIDE:"
+#define MULTI_MENU_CLIENT "C - CLINET"
+#define MULTI_MENU_SERVER "S - SERVER"
 #define LVL_CLEAR  "LEVEL CLEAR!"
 #define PRESS_KEY  "PRESS ANY KEY..."
 #define MSG_FROM_CLIENT "CONNECT"
@@ -55,8 +62,14 @@
 #define LEFT_MOVE ACS_LARROW
 #define RIGHT_MOVE ACS_RARROW
 
+#define SINGLE_PLAYER_FLAG 26
+#define MULTI_PLAYER_FLAG 27
+#define QUIT_FLAG 28
+
 #define SERVER_PORT 2222
 #define CLIENT_PORT 2223
+
+#define LEVEL_COUNT 3
 
 #define LEVEL_1 1
 #define MAP1 \
@@ -104,7 +117,7 @@ typedef struct
         int yPos;
         int color_number;
    } Object;
-
+    
 /* Вывод карты уровня */
 void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count);
 /* Функция выбора уровня из пресета карт */
@@ -130,12 +143,25 @@ bool Winable(Object *Boxs, Object *Endpoints, size_t bCount, size_t eCount);
 /* Отрисовка меню */
 void DrawMenu(WINDOW *menuWnd); 
 /* Выбор пунктов в меню */
-void PickMenu(WINDOW *menuWnd); 
+int PickMenu(WINDOW *menuWnd); 
 /* Инициализация объектов */
 void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int ***map, Object *Player, int lvlNumber, size_t *turnCount);
 /* Инициализация сокета */
 bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile);
 /* Соединение между клиентом и сервером */
 bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, FILE *logFile);
+/* Вывод карты уровня оппонента в мультиплеере */
 void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count);
+/* Удаление основного меню */
+void DeleteMenu(WINDOW *menuWnd);
+/* Отрисовка меню выбора в мультиплеере */
+void DrawMultiplayerMenu();
+/* Функция игры в синглплеере */
+void SinglePlayer(WINDOW *lvlWnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+/* Функция выбора режима в мультиплеере */
+void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+/* Функция игры в качестве клиента */
+void MultiPlayerClient(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+/* Функция игры в качестве сервера */
+void MultiPlayerServer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 #endif

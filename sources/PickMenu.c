@@ -1,44 +1,27 @@
  #include "main.h"
  
- void PickMenu(WINDOW *menuWnd)
+ int PickMenu(WINDOW *menuWnd)
  {
-    int ch = 0;
-    bool selected = false;
-    do
+    switch(getchar())
     {
-        ch = getchar();
-        switch(ch)
+        case 's':
         {
-           case 's':
-            {
-               delwin(menuWnd);
-               clear();
-               refresh();
-               selected = true;  
-               break; 
-            }
-            case 'm':
-            {
-                DrawMenu(menuWnd);
-                getch();
-                break; 
-            }
-            case 'q':
-            {
-                delwin(menuWnd);
-                clear();
-                refresh(); 
-                endwin();
-                selected = true;
-                exit(1); 
-                break; 
-            }
-            default:
-            {
-                //DrawMenu(menuWnd);
-                //getch();
-                break;  
-            }      
+           return SINGLE_PLAYER_FLAG;
+           break; 
         }
-    }while(!selected);
+        case 'm':
+        {
+            return MULTI_PLAYER_FLAG;
+            break; 
+        }
+        case 'q':
+        {
+            return QUIT_FLAG;
+            break; 
+        }
+        default:
+        {
+            break;  
+        }      
+    }
 }

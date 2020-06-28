@@ -2,9 +2,10 @@
 
 void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count)
 {        	
-	lvlWnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
-	wattron(lvlWnd, A_BOLD);
-	box(lvlWnd,0,0);
+    refresh();
+    lvlWnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
+    wattron(lvlWnd, A_BOLD);
+    box(lvlWnd,0,0);
 
     init_pair(1, COLOR_WHITE, COLOR_BLUE);
     init_pair(2, COLOR_MAGENTA, COLOR_BLUE);
