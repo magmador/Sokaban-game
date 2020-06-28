@@ -2,6 +2,8 @@
 
 bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile)
 {
+	int flags = fcntl(*socket_fd, F_GETFL); 
+	fcntl(*socket_fd, F_SETFL, flags | O_NONBLOCK); /* делаем сокет неблокирующим */
 	*socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (*socket_fd == -1)
 	{
