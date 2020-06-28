@@ -15,7 +15,6 @@ int main()
 	WINDOW *lvlWnd;
 	DrawMenu(menuWnd); 
 	PickMenu(menuWnd);
-
 	   
 	size_t turnCount = 0;//счетчик ходов - пока здесь
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
