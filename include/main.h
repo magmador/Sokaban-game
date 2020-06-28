@@ -53,18 +53,19 @@
 #define MAP_COL_COUNT 10
 #define ROW_MAP_SIZE  MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE  MAP_COL_COUNT * sizeof(int)
+#define MAP_SIZE 	  MAP_ROW_COUNT * MAP_COL_COUNT * sizeof(int)
 
 #define LVL_WIN_COLS MAP_COL_COUNT + 10
 #define LVL_WIN_ROWS MAP_ROW_COUNT + 5
 
-#define UP_MOVE ACS_UARROW
-#define DOWN_MOVE ACS_DARROW
-#define LEFT_MOVE ACS_LARROW
+#define UP_MOVE    ACS_UARROW
+#define DOWN_MOVE  ACS_DARROW
+#define LEFT_MOVE  ACS_LARROW
 #define RIGHT_MOVE ACS_RARROW
 
 #define SINGLE_PLAYER_FLAG 26
-#define MULTI_PLAYER_FLAG 27
-#define QUIT_FLAG 28
+#define MULTI_PLAYER_FLAG  27
+#define QUIT_FLAG 		   28
 
 #define SERVER_PORT 2222
 #define CLIENT_PORT 2223
@@ -173,5 +174,6 @@ void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size
 void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция игры в качестве сервера */
 void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
-
+/* Функция выделения памяти под map в структуре сетевого буфера */
+bool InitNetBufferMap(int ***map);
 #endif
