@@ -1,11 +1,11 @@
 #include "main.h"
 
-bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t *turnCount, bool *restart)
+bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t *turnCount, bool *restart, int levelCur)
 {
 	int mapStart[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP1 };
 	bool win = false;
 	
-    int inputKey = getchar();
+        int inputKey = getchar();
 	switch(inputKey)
 	{
 		/* Код стрелки вверх */
@@ -14,7 +14,7 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object
 			if (MoveUp(map, Player, bCount, Boxs, eCount, Endpoints))
 			{
 				(*turnCount)++;
-				LevelOutput(lvlWnd, map, logFile, UP_MOVE, *turnCount);
+				LevelOutput(lvlWnd, map, logFile, UP_MOVE, *turnCount, levelCur + 1);
 				win = Winable(Boxs, Endpoints, bCount, eCount);
 				return win;
 			}
@@ -26,7 +26,7 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object
 			if(MoveDown(map, Player, bCount, Boxs, eCount, Endpoints))
 			{
 				(*turnCount)++;
-				LevelOutput(lvlWnd, map, logFile, DOWN_MOVE, *turnCount);
+				LevelOutput(lvlWnd, map, logFile, DOWN_MOVE, *turnCount, levelCur + 1);
 				win = Winable(Boxs, Endpoints, bCount, eCount);
 				return win;
 			}
@@ -38,7 +38,7 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object
 			if(MoveLeft(map, Player, bCount, Boxs, eCount, Endpoints))
 			{
 				(*turnCount)++;
-				LevelOutput(lvlWnd, map, logFile, LEFT_MOVE, *turnCount);
+				LevelOutput(lvlWnd, map, logFile, LEFT_MOVE, *turnCount, levelCur + 1);
 				win = Winable(Boxs, Endpoints, bCount, eCount);
 				return win;
 			}
@@ -50,7 +50,7 @@ bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object
 			if(MoveRight(map, Player, bCount, Boxs, eCount, Endpoints))
 			{
 				(*turnCount)++;
-				LevelOutput(lvlWnd, map, logFile, RIGHT_MOVE, *turnCount);
+				LevelOutput(lvlWnd, map, logFile, RIGHT_MOVE, *turnCount, levelCur + 1);
 				win = Winable(Boxs, Endpoints, bCount, eCount);
 				return win;
 			}

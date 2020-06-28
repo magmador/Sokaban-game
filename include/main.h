@@ -118,12 +118,14 @@ typedef struct
         int color_number;
    } Object;
     
+/* Инициализация ncurses */
+void InitCurses();
 /* Вывод карты уровня */
-void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count);
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur);
 /* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Функция передвижения персонажа */
-bool PlayerMove(WINDOW *lvlWnd, int **map, Object *player, size_t oCount, Object *boxs, size_t eCount, Object *endpoints, FILE *logFile, size_t *turnCount, bool *restart);
+bool PlayerMove(WINDOW *lvlWnd, int **map, Object *player, size_t oCount, Object *boxs, size_t eCount, Object *endpoints, FILE *logFile, size_t *turnCount, bool *restart, int levelCur);
 /* Выбор уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Инициализация массива объектов */
@@ -151,7 +153,7 @@ bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile);
 /* Соединение между клиентом и сервером */
 bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, FILE *logFile);
 /* Вывод карты уровня оппонента в мультиплеере */
-void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count);
+void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur);
 /* Удаление основного меню */
 void DeleteMenu(WINDOW *menuWnd);
 /* Отрисовка меню выбора в мультиплеере */
@@ -161,7 +163,8 @@ void SinglePlayer(WINDOW *lvlWnd, int **map, Object Player, size_t bCount, Objec
 /* Функция выбора режима в мультиплеере */
 void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция игры в качестве клиента */
-void MultiPlayerClient(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция игры в качестве сервера */
-void MultiPlayerServer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+
 #endif

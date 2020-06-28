@@ -1,6 +1,6 @@
 #include "main.h"
 
-void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count)
+void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur)
 {        	
     refresh();
     lvlWnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
@@ -61,10 +61,12 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 	move(MAP_ROW_COUNT + 1, MAP_COL_COUNT - 4);
 	printw("You");
 	move(MAP_ROW_COUNT + 2, MAP_COL_COUNT - 4);
-	printw("R - restart level!");
+	printw("Level %d", levelCur);
 	move(MAP_ROW_COUNT + 3, MAP_COL_COUNT - 4);
-	printw("Q - exit!");
+	printw("R - restart level!");
 	move(MAP_ROW_COUNT + 4, MAP_COL_COUNT - 4);
+	printw("Q - exit!");
+	move(MAP_ROW_COUNT + 5, MAP_COL_COUNT - 4);
 	printw("Turns:%d", count);
 	wrefresh(lvlWnd);
 	refresh();

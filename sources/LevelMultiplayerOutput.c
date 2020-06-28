@@ -1,6 +1,6 @@
 #include "main.h"
 
-void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count)
+void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur)
 {        
 	refresh();	
 	lvl2Wnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X_OPPONENT); 
@@ -61,6 +61,8 @@ void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const cht
 	move(MAP_ROW_COUNT + 1, MENU_X_OPPONENT + 6);
 	printw("Opponent");
 	move(MAP_ROW_COUNT + 2, MENU_X_OPPONENT + 6);
+	printw("Level %d", levelCur);
+	move(MAP_ROW_COUNT + 3, MENU_X_OPPONENT + 6);
 	printw("Turns:%d", count);
         wrefresh(lvl2Wnd);
 	refresh();

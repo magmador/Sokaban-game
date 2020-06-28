@@ -3,13 +3,7 @@
 int main()
 {
 	/* Блок инициализации ncurses */
-	initscr();
-        cbreak();
-        curs_set(FALSE);
-	keypad(stdscr, TRUE);
-        noecho();
-        start_color();
-        refresh();
+	InitCurses();
 	/* Отрисовка меню */
 	WINDOW *menuWnd;
 	WINDOW *lvlWnd;
