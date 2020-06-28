@@ -1,10 +1,9 @@
 #include "main.h"
 
-
 void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int ***map, Object *Player, int lvlNumber, size_t *turnCount)
 {
-    *turnCount = 0;
-    if(!LevelSelect(lvlNumber, map))
+	*turnCount = 0;
+	if (!LevelSelect(lvlNumber, map))
 	{
 		fprintf(logFile, "'%s': Level not loaded\n", __FUNCTION__);
 		exit(1);
@@ -13,7 +12,7 @@ void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t
 	{
 		fprintf(logFile, "'%s': Level successfully loaded\n", __FUNCTION__);
 	}
-	if(!ObjInit(boxCount, Boxs, *map, BOX_MAP_OBJ))
+	if (!ObjInit(boxCount, Boxs, *map, BOX_MAP_OBJ))
 	{
 		fprintf(logFile, "'%s': Can't initialize object Boxs\n", __FUNCTION__);
 		exit(1);
@@ -21,10 +20,11 @@ void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t
 	else
 	{
 		fprintf(logFile, "'%s': Object Boxs successfully initialized\n", __FUNCTION__);
-		for(size_t i = 0; i < *boxCount; i++) fprintf(logFile, "%d:%d ", (*Boxs)[i].yPos, (*Boxs)[i].xPos);
+		for (size_t i = 0; i < *boxCount; i++)
+			fprintf(logFile, "%d:%d ", (*Boxs)[i].yPos, (*Boxs)[i].xPos);
 		fprintf(logFile, "\n");
 	}
-	if(!ObjInit(endpointCount, Endpoints, *map, ENDPOINT_MAP_OBJ))
+	if (!ObjInit(endpointCount, Endpoints, *map, ENDPOINT_MAP_OBJ))
 	{
 		fprintf(logFile, "'%s': Can't initialize object Endpoints\n", __FUNCTION__);
 		exit(1);
@@ -32,10 +32,11 @@ void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t
 	else
 	{
 		fprintf(logFile, "'%s': Object Endpoints successfully initialized\n", __FUNCTION__);
-		for(size_t i = 0; i < *boxCount; i++) fprintf(logFile, "%d:%d ", (*Endpoints)[i].yPos, (*Endpoints)[i].xPos);
+		for (size_t i = 0; i < *boxCount; i++)
+			fprintf(logFile, "%d:%d ", (*Endpoints)[i].yPos, (*Endpoints)[i].xPos);
 		fprintf(logFile, "\n");
 	}
-	if(!PlayerInit(Player, *map, PLAYER_MAP_OBJ))
+	if (!PlayerInit(Player, *map, PLAYER_MAP_OBJ))
 	{
 		fprintf(logFile, "'%s': Can't initialize object Player\n", __FUNCTION__);
 		exit(1);
@@ -43,6 +44,6 @@ void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t
 	else
 	{
 		fprintf(logFile, "'%s': Object Player successfully initialized\n", __FUNCTION__);
-		fprintf(logFile, "%d:%d \n", Player -> yPos, Player -> xPos);
+		fprintf(logFile, "%d:%d \n", Player->yPos, Player->xPos);
 	}
 }

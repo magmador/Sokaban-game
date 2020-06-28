@@ -4,13 +4,13 @@ bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, 
 {
 	bool connected = false;
 	int len = sizeof(*addr);
-	char buf[100]; 
+	char buf[100];
 	if (server_init)
 	{
 		/*Сервер*/
 		do
 		{
-			if (recvfrom(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *) addr, &len) == -1)
+			if (recvfrom(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *)addr, &len) == -1)
 			{
 				fprintf(logFile, "Recv request on connection fail!\n");
 				return false;
@@ -18,7 +18,7 @@ bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, 
 			if (!strcmp(buf, MSG_FROM_CLIENT))
 			{
 				memcpy((void *)buf, (void *)MSG_TO_CLIENT, sizeof(MSG_TO_CLIENT));
-				if (sendto(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *) addr, len) == -1)
+				if (sendto(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *)addr, len) == -1)
 				{
 					fprintf(logFile, "Send request on connection fail!\n");
 					return false;
@@ -32,20 +32,20 @@ bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, 
 				fprintf(logFile, "Wrong message from client!\n");
 				return false;
 			}
-		}while(!connected);
+		} while (!connected);
 	}
 	else
 	{
 		/*Клиент*/
 		memcpy((void *)buf, (void *)MSG_FROM_CLIENT, sizeof(MSG_FROM_CLIENT));
-		if (sendto(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *) addr, len) == -1)
+		if (sendto(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *)addr, len) == -1)
 		{
 			fprintf(logFile, "Send request on connection fail!\n");
 			return false;
 		}
 		do
 		{
-			if (recvfrom(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *) addr, &len) == -1)
+			if (recvfrom(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *)addr, &len) == -1)
 			{
 				fprintf(logFile, "Recv request on connection fail!\n");
 				return false;
@@ -56,6 +56,6 @@ bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, 
 				connected = true;
 				return true;
 			}
-		}while(!connected);
+		} while (!connected);
 	}
 }

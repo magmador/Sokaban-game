@@ -115,8 +115,15 @@ typedef struct
    {
         int xPos;
         int yPos;
-        int color_number;
    } Object;
+
+/* Структура сетевого буфера */
+typedef struct
+   {
+	   int **map;
+	   bool win;
+	   int levelNumber;
+   } NetworkBuffer;
     
 /* Инициализация ncurses */
 void InitCurses();

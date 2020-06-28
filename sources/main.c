@@ -8,18 +8,18 @@ int main()
 	WINDOW *menuWnd;
 	WINDOW *lvlWnd;
 	WINDOW *lvl2Wnd;
-	   
-	size_t turnCount = 0;//счетчик ходов - пока здесь
+
+	size_t turnCount = 0; //счетчик ходов - пока здесь
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
 	FILE *logFile;
 	if ((logFile = fopen(LOGFILE, "w")) == NULL)
-  	{
-    	printf("'%s': ошибка при открытии лог-файла\n", __FUNCTION__);
-    	exit(1);
-  	}
+	{
+		printf("'%s': ошибка при открытии лог-файла\n", __FUNCTION__);
+		exit(1);
+	}
 
-/* Использовалось для проверки функций. Возможно пригодится */
-/* 
+	/* Использовалось для проверки функций. Возможно пригодится */
+	/* 
     int socket_fd = 0;
     if (!NetworkInit(&socket_fd, server, logFile))
     {
@@ -52,49 +52,49 @@ int main()
 
 	/* Загрузка уровня */
 	int **map = NULL;
-	int Levels[LEVEL_COUNT] = { LEVEL_1, LEVEL_2, LEVEL_3 };
+	int Levels[LEVEL_COUNT] = {LEVEL_1, LEVEL_2, LEVEL_3};
 	bool restart = false;
 	init_pair(5, COLOR_WHITE, COLOR_BLUE);
-	
-	DrawMenu(menuWnd); 
-	
+
+	DrawMenu(menuWnd);
+
 	bool selected = false;
 	do
 	{
-            switch(PickMenu(menuWnd))
-	    {
-	        case SINGLE_PLAYER_FLAG:
+		switch (PickMenu(menuWnd))
 		{
-		   DeleteMenu(menuWnd);
-		   selected = true; 
-		   SinglePlayer(lvlWnd, map, Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount, restart, Levels);
-		   break; 
+		case SINGLE_PLAYER_FLAG:
+		{
+			DeleteMenu(menuWnd);
+			selected = true;
+			SinglePlayer(lvlWnd, map, Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount, restart, Levels);
+			break;
 		}
 		case MULTI_PLAYER_FLAG:
 		{
-		    DeleteMenu(menuWnd);
-		    selected = true; 
-	            MultiPlayer(lvlWnd, lvl2Wnd, map, Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount, restart, Levels);
-		    break; 
+			DeleteMenu(menuWnd);
+			selected = true;
+			MultiPlayer(lvlWnd, lvl2Wnd, map, Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount, restart, Levels);
+			break;
 		}
 		case QUIT_FLAG:
 		{
-                   DeleteMenu(menuWnd);
-		    endwin();
-		    selected = true;
-		    exit(1); 
-		    break; 
+			DeleteMenu(menuWnd);
+			endwin();
+			selected = true;
+			exit(1);
+			break;
 		}
 		default:
 		{
-		    break;  
-		}      
-	    }
-	}while(!selected);
+			break;
+		}
+		}
+	} while (!selected);
 
 	/* Удаление окон */
-    delwin(menuWnd);
-    endwin();
-        
+	delwin(menuWnd);
+	endwin();
+
 	return 0;
 }
