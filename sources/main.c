@@ -58,7 +58,6 @@ int main()
 			}
 			if(restart)
 			{
-				turnCount = 0;
 				ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
 				LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount);
 				restart = false;

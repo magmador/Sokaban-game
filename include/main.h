@@ -99,7 +99,7 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 /* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Функция передвижения персонажа */
-bool PlayerMove(WINDOW *lvlWnd, int **map, Object* player, size_t oCount, Object* boxs, size_t eCount, Object* endpoints, FILE *logFile, size_t *turnCount, bool *restart);
+bool PlayerMove(WINDOW *lvlWnd, int **map, Object *player, size_t oCount, Object *boxs, size_t eCount, Object *endpoints, FILE *logFile, size_t *turnCount, bool *restart);
 /* Выбор уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Инициализация массива объектов */
@@ -107,13 +107,13 @@ bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj);
 /* Инициализация объекта игрока */
 bool PlayerInit(Object *Player, int **map, int obj);
 /* Движение вверх */
-bool MoveUp(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints);
+bool MoveUp(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints);
 /* Движение вниз */
-bool MoveDown(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints);
+bool MoveDown(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints);
 /* Движение влево */
-bool MoveLeft(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints);
+bool MoveLeft(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints);
 /* Движение вправо */
-bool MoveRight(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints); 
+bool MoveRight(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints); 
 /* Проверка условия локальной победы */
 bool Winable(Object *Boxs, Object *Endpoints, size_t bCount, size_t eCount);  
 /* Отрисовка меню */

@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object* Boxs, size_t eCount, Object* Endpoints, FILE *logFile, size_t *turnCount, bool *restart)
+bool PlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t *turnCount, bool *restart)
 {
 	int mapStart[MAP_ROW_COUNT][MAP_COL_COUNT] = { MAP1 };
 	bool win = false;

@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool MoveRight(int **map, Object* player, size_t bCount, Object* boxs, size_t eCount, Object* endpoints)
+bool MoveRight(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints)
 {
 	if (map[player -> yPos][player -> xPos  + 1] != WALL_MAP_OBJ) //Проверка на стену по направлению движения
 	{
