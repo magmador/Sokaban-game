@@ -130,7 +130,9 @@ void DrawMenu(WINDOW *menuWnd);
 void PickMenu(WINDOW *menuWnd); 
 /* Инициализация объектов */
 void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int ***map, Object *Player, int lvlNumber, size_t *turnCount);
+/* Инициализация сокета */
 bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile);
+/* Соединение между клиентом и сервером */
 bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, FILE *logFile);
 
 #endif
