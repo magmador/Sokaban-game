@@ -57,6 +57,10 @@ void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const cht
 	fprintf(logFile, "\n");
 
 	attron(COLOR_PAIR(5));
+	move(MAP_ROW_COUNT + 1, MENU_X_OPPONENT + 6);
+	printw("Opponent");
+	move(MAP_ROW_COUNT + 2, MENU_X_OPPONENT + 6);
+	printw("Turns:%d", count);
         wrefresh(lvl2Wnd);
 	refresh();
 }
