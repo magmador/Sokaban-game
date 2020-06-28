@@ -24,6 +24,7 @@
 #define MENU_ROWS  25
 #define MENU_X	   5
 #define MENU_Y	   2
+#define MENU_X_OPPONENT	   35
 #define MENU_TITLE "SOKABAN THE GAME"
 #define MENU_SIN   "PRESS 'S' FOR NEW SINGLE GAME"
 #define MENU_MULTI "PRESS 'M' FOR MULTIPLAYER"
@@ -135,5 +136,5 @@ void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t
 bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile);
 /* Соединение между клиентом и сервером */
 bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, FILE *logFile);
-
+void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count);
 #endif
