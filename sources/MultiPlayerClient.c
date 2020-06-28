@@ -4,31 +4,33 @@ void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 {
 	int len = sizeof(*addr);
 	NetworkBuffer InBuffer;
-	InitNetBufferMap(&InBuffer.map);
-	NetworkBuffer OutBuffer;
-	InitNetBufferMap(&OutBuffer.map);
+
+	char buf[NET_BUF_SIZE];
+	pthread_t recieverThread;
+	ArgStruct args;
+	args.socket_fd = *socket_fd;
+	memcpy(&args.addr, addr, sizeof(struct sockaddr_in));
+	args.lvl2Wnd = lvl2Wnd;
+	args.logFile = logFile;
+	args.turnCount = turnCount;
+	args.levelCur = 0;
+	pthread_create(&recieverThread, NULL, (void *) OpponentReciever, (void *) &args);
 	
 	for (int levelCur = 0; levelCur < LEVEL_COUNT; levelCur++)
 	{
 		ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
-
-		memcpy(InBuffer.map, map, MAP_SIZE);
-
+		MapToChar(map, &InBuffer, buf);
 		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
-		if(sendto(*socket_fd, InBuffer.map, MAP_SIZE, 0, (struct sockaddr *) addr, len) == -1)
+		
+		if(sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
 		{
 			fprintf(logFile, "Incorrect client send\n");
 		    exit(1);
 		}
-		if(recvfrom(*socket_fd, OutBuffer.map, MAP_SIZE, 0, (struct sockaddr *) addr, &len) == -1)
-		{
-			fprintf(logFile, "Incorrect client recv\n");
-		    exit(1);
-		}
-		LevelMultiplayerOutput(lvl2Wnd, OutBuffer.map, logFile, UP_MOVE, turnCount, levelCur + 1);
+
 		do
 		{
-			if (PlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart, levelCur))
+			if (MultiPlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart, levelCur, &InBuffer, buf, socket_fd, addr))
 			{
 				attron(COLOR_PAIR(5));
 				mvwprintw(stdscr, MAP_ROW_COUNT + 4, MAP_COL_COUNT - 4, LVL_CLEAR);
@@ -39,6 +41,13 @@ void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 				ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
 				LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
 				restart = false;
+
+				MapToChar(map, &InBuffer, buf);
+				if(sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
+				{
+					fprintf(logFile, "Incorrect server send\n");
+					exit(1);
+				}
 			}
 		} while (1);
 

@@ -4,9 +4,11 @@ int main()
 {
 	/* Блок инициализации ncurses */
 	InitCurses();
-	/* Отрисовка меню */
+	/* Окно меню */
 	WINDOW *menuWnd;
+	/* Окно игрока */
 	WINDOW *lvlWnd;
+	/* Окно оппонента */
 	WINDOW *lvl2Wnd;
 
 	size_t turnCount = 0; //счетчик ходов - пока здесь
@@ -17,28 +19,6 @@ int main()
 		printf("'%s': ошибка при открытии лог-файла\n", __FUNCTION__);
 		exit(1);
 	}
-
-	/* Использовалось для проверки функций. Возможно пригодится */
-	/* 
-    int socket_fd = 0;
-    if (!NetworkInit(&socket_fd, server, logFile))
-    {
-    	fprintf(logFile, "'%s': Can't initialize socket\n", __FUNCTION__);
-    	exit(1);
-   	}
-   	struct sockaddr_in addr;
-   	if (!server)
-   	{
-   		addr.sin_family = AF_INET;
-   		addr.sin_port = htons(SERVER_PORT);
-   		addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-   	}
-   	if (!NetworkConnect(&socket_fd, &addr, server, logFile))
-    {
-    	fprintf(logFile, "'%s': Connection fail!\n", __FUNCTION__);
-    	exit(1);
-   	}
-*/
 
 	/* Инициализация базовых объектов */
 	/* Массив ящиков */

@@ -1,15 +1,17 @@
-#include <ncurses.h>
-#include <stdbool.h>
+#include <stdio.h>
+#include <fcntl.h>
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <fcntl.h>
+#include <unistd.h>
+#include <ncurses.h>
+#include <stdbool.h>
+#include <pthread.h>
+#include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
-#include <arpa/inet.h>
 
 #ifndef MAIN_H
 #define MAIN_H 
@@ -20,27 +22,27 @@
 #define KEY_ARROW_DOWN 	66
 #define KEY_ARROW_LEFT	68
 #define KEY_ARROW_RIGHT 67
-
-#define MENU_COLS  50
-#define MENU_ROWS  25
-#define MENU_X	   5
-#define MENU_Y	   2
-#define MENU_X_OPPONENT	   35
+#define MENU_COLS  		50
+#define MENU_ROWS  		25
+#define MENU_X	   		5
+#define MENU_Y	   		2
+#define MENU_X_OPPONENT	35
 #define MULTI_MENU_COLS 20
 #define MULTI_MENU_ROWS 10
-#define MULTI_MENU_Y 5
-#define MULTI_MENU_X 2
-#define MENU_TITLE "SOKABAN THE GAME"
-#define MENU_SIN   "PRESS 'S' FOR NEW SINGLE GAME"
-#define MENU_MULTI "PRESS 'M' FOR MULTIPLAYER"
-#define MENU_EXIT  "PRESS 'Q' FOR EXIT"
-#define MULTI_MENU_TITLE "CHOOSE YOUR SIDE:"
-#define MULTI_MENU_CLIENT "C - CLINET"
-#define MULTI_MENU_SERVER "S - SERVER"
-#define LVL_CLEAR  "LEVEL CLEAR!"
-#define PRESS_KEY  "PRESS ANY KEY..."
-#define MSG_FROM_CLIENT "CONNECT"
-#define MSG_TO_CLIENT "SUCCESS"
+#define MULTI_MENU_Y 	5
+#define MULTI_MENU_X 	2
+
+#define MENU_TITLE 			"SOKABAN THE GAME"
+#define MENU_SIN   			"PRESS 'S' FOR NEW SINGLE GAME"
+#define MENU_MULTI 			"PRESS 'M' FOR MULTIPLAYER"
+#define MENU_EXIT  			"PRESS 'Q' FOR EXIT"
+#define MULTI_MENU_TITLE 	"CHOOSE YOUR SIDE:"
+#define MULTI_MENU_CLIENT 	"C - CLINET"
+#define MULTI_MENU_SERVER 	"S - SERVER"
+#define LVL_CLEAR  			"LEVEL CLEAR!"
+#define PRESS_KEY  			"PRESS ANY KEY..."
+#define MSG_FROM_CLIENT 	"CONNECT"
+#define MSG_TO_CLIENT 		"SUCCESS"
 
 #define NOT_PL_SPACE_MAP_OBJ -1
 #define SPACE_MAP_OBJ 		  0
@@ -54,6 +56,7 @@
 #define ROW_MAP_SIZE  MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE  MAP_COL_COUNT * sizeof(int)
 #define MAP_SIZE 	  MAP_ROW_COUNT * MAP_COL_COUNT * sizeof(int)
+#define NET_BUF_SIZE  MAP_SIZE + sizeof(bool) + sizeof(int)
 
 #define LVL_WIN_COLS MAP_COL_COUNT + 10
 #define LVL_WIN_ROWS MAP_ROW_COUNT + 5
@@ -68,7 +71,6 @@
 #define QUIT_FLAG 		   28
 
 #define SERVER_PORT 2222
-#define CLIENT_PORT 2223
 
 #define LEVEL_COUNT 3
 
@@ -121,11 +123,21 @@ typedef struct
 /* Структура сетевого буфера */
 typedef struct
    {
-	   int **map;
+	   char map[MAP_SIZE];
 	   bool win;
 	   int levelNumber;
    } NetworkBuffer;
-    
+
+/* Структура аргументов для потока */
+typedef struct{
+    int socket_fd;
+    struct sockaddr_in addr;
+    WINDOW *lvl2Wnd;
+    FILE *logFile;
+    size_t turnCount;
+    int levelCur;
+} ArgStruct;
+
 /* Инициализация ncurses */
 void InitCurses();
 /* Вывод карты уровня */
@@ -174,6 +186,15 @@ void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size
 void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция игры в качестве сервера */
 void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+/* Функция передвижения персонажа в мультиплеере */
+bool MultiPlayerMove(WINDOW *lvlWnd, int **map, Object *Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t *turnCount, bool *restart, int levelCur, NetworkBuffer *InBuffer, char* buf, int *socket_fd, struct sockaddr_in *addr);
 /* Функция выделения памяти под map в структуре сетевого буфера */
 bool InitNetBufferMap(int ***map);
+/* Функция обрабатывающая приходящую информацию от оппонента */
+void *OpponentReciever(void *arguments);
+/* Функция парсинга map в строку */
+void MapToChar(int **map, NetworkBuffer *InBuffer, char *buf);
+/* Функция парсинга строки в map */
+void CharToMap(int **map, NetworkBuffer *OutBuffer, char *buf);
+
 #endif

@@ -1,7 +1,7 @@
 CFLAGS = -I ../include
-LIBS = -lncurses
+LIBS = -lncurses -lpthread
 CC = gcc
-SOURCES = main.c InitCurses.c LevelOutput.c LevelMultiplayerOutput.c LevelSelect.c PlayerMove.c ObjInit.c PlayerInit.c MoveUp.c MoveDown.c MoveLeft.c MoveRight.c Winable.c DrawMenu.c DrawMultiplayerMenu.c PickMenu.c DeleteMenu.c ObjectInitialization.c SinglePlayer.c MultiPlayer.c MultiPlayerClient.c MultiPlayerServer.c NetworkInit.c NetworkConnect.c InitNetBufferMap.c
+SOURCES = main.c InitCurses.c LevelOutput.c LevelMultiplayerOutput.c LevelSelect.c PlayerMove.c ObjInit.c PlayerInit.c MoveUp.c MoveDown.c MoveLeft.c MoveRight.c Winable.c DrawMenu.c DrawMultiplayerMenu.c PickMenu.c DeleteMenu.c ObjectInitialization.c SinglePlayer.c MultiPlayer.c MultiPlayerClient.c MultiPlayerServer.c NetworkInit.c NetworkConnect.c InitNetBufferMap.c OpponentReciever.c CharToMap.c MapToChar.c MultiPlayerMove.c
 OBJECTS = $(SOURCES:.c=.o)
 EXECUTABLE =  ../bin/main
 

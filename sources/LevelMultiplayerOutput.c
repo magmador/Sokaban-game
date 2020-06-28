@@ -2,7 +2,7 @@
 
 void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur)
 {
-	refresh();
+	//refresh();
 	lvl2Wnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X_OPPONENT);
 	wattron(lvl2Wnd, A_BOLD);
 	box(lvl2Wnd, 0, 0);
