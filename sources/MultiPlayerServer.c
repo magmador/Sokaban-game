@@ -13,14 +13,14 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 	args.lvl2Wnd = lvl2Wnd;
 	args.logFile = logFile;
 	args.turnCount = turnCount;
-	args.levelCur = 0;
-	pthread_create(&recieverThread, NULL, (void *)OpponentReciever, (void *)&args);
 
 	for (int levelCur = 0; levelCur < LEVEL_COUNT; levelCur++)
 	{
 		ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
 		MapToChar(map, &InBuffer, buf);
 		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
+		args.levelCur = levelCur;
+		pthread_create(&recieverThread, NULL, (void *)OpponentReciever, (void *)&args);
 
 		if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
 		{
@@ -53,6 +53,7 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 
 		attron(COLOR_PAIR(5));
 		mvwprintw(stdscr, MAP_ROW_COUNT + 5, MAP_COL_COUNT - 4, PRESS_KEY);
+		pthread_join(recieverThread, NULL);
 		refresh();
 		getch();
 	}
