@@ -1,6 +1,6 @@
 #include "main.h"
 
-void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[])
+void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[], char *ipAddr)
 {
 	WINDOW *multiWnd = newwin(MULTI_MENU_ROWS, MULTI_MENU_COLS, MULTI_MENU_Y, MULTI_MENU_X);
 	DrawMultiplayerMenu(multiWnd);
@@ -22,7 +22,7 @@ void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size
 
 			addr.sin_family = AF_INET;
 			addr.sin_port = htons(SERVER_PORT);
-			addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+			addr.sin_addr.s_addr = inet_addr(ipAddr);
 
 			if (!NetworkConnect(&socket_fd, &addr, 0, logFile))
 			{

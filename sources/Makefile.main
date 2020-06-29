@@ -1,7 +1,11 @@
 CFLAGS = -I ../include
 LIBS = -lncurses -lpthread
 CC = gcc
-SOURCES = main.c InitCurses.c LevelOutput.c LevelMultiplayerOutput.c LevelSelect.c PlayerMove.c ObjInit.c PlayerInit.c MoveUp.c MoveDown.c MoveLeft.c MoveRight.c Winable.c DrawMenu.c DrawMultiplayerMenu.c PickMenu.c DeleteMenu.c ObjectInitialization.c SinglePlayer.c MultiPlayer.c MultiPlayerClient.c MultiPlayerServer.c NetworkInit.c NetworkConnect.c InitNetBufferMap.c OpponentReciever.c CharToMap.c MapToChar.c MultiPlayerMove.c LevelEndSend.c CleanStdin.c
+GRAPHDIR = ./graph
+LOGICDIR = ./logic
+MULTIPLAYERDIR = ./multiplayer
+SINGLEDIR = ./singleplayer
+SOURCES = main.c $(LOGICDIR)/LevelSelect.c $(LOGICDIR)/MoveDown.c $(LOGICDIR)/MoveLeft.c $(LOGICDIR)/MoveRight.c $(LOGICDIR)/MoveUp.c $(LOGICDIR)/ObjectInitialization.c $(LOGICDIR)/ObjInit.c $(LOGICDIR)/PickMenu.c $(LOGICDIR)/PlayerInit.c $(LOGICDIR)/Winable.c $(GRAPHDIR)/DeleteMenu.c $(GRAPHDIR)/DrawMenu.c $(GRAPHDIR)/DrawMultiplayerMenu.c $(GRAPHDIR)/InitCurses.c $(GRAPHDIR)/LevelMultiplayerOutput.c $(GRAPHDIR)/LevelOutput.c $(MULTIPLAYERDIR)/CharToMap.c $(MULTIPLAYERDIR)/CleanStdin.c $(MULTIPLAYERDIR)/InitNetBufferMap.c $(MULTIPLAYERDIR)/LevelEndSend.c $(MULTIPLAYERDIR)/MapToChar.c $(MULTIPLAYERDIR)/MultiPlayer.c $(MULTIPLAYERDIR)/MultiPlayerClient.c $(MULTIPLAYERDIR)/MultiPlayerServer.c $(MULTIPLAYERDIR)/MultiPlayerWin.c $(MULTIPLAYERDIR)/NetworkConnect.c $(MULTIPLAYERDIR)/NetworkInit.c $(MULTIPLAYERDIR)/MultiPlayerMove.c $(MULTIPLAYERDIR)/OpponentReciever.c $(SINGLEDIR)/PlayerMove.c $(SINGLEDIR)/SinglePlayer.c
 OBJECTS = $(SOURCES:.c=.o)
 EXECUTABLE =  ../bin/main
 

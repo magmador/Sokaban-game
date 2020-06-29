@@ -11,15 +11,16 @@ void *OpponentReciever(void *arguments)
 
 	do
 	{
-		while (recvfrom(args->socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)&args->addr, &len) == -1)
+		if(recvfrom(args->socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)&args->addr, &len) == -1)
 		{
 			fprintf(args->logFile, "Incorrect client recv\n");
 		}
-		if (!strcmp(buf, MSG_LVL_END))
+
+		if(!strcmp(buf, MSG_LVL_END))
 		{
 			break;
 		}
-
+		
 		CharToMap(map, &OutBuffer, buf);
 		args->turnCount = OutBuffer.turnCount;
 		LevelMultiplayerOutput(args->lvl2Wnd, map, args->logFile, OutBuffer.move, args->turnCount, args->levelCur + 1);

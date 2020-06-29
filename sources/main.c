@@ -1,7 +1,14 @@
 #include "main.h"
 
-int main()
+int main(int argc, char *argv[])
 {
+	char ipAddr[12];
+	if(argc > 1)
+	{
+		strcpy(ipAddr, argv[1]);
+	}
+	else strcpy(ipAddr, "127.0.0.1");
+
 	/* Блок инициализации ncurses */
 	InitCurses();
 	/* Окно меню */
@@ -54,7 +61,7 @@ int main()
 		{
 			DeleteMenu(menuWnd);
 			selected = true;
-			MultiPlayer(lvlWnd, lvl2Wnd, map, Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount, restart, Levels);
+			MultiPlayer(lvlWnd, lvl2Wnd, map, Player, boxCount, Boxs, endpointCount, Endpoints, logFile, turnCount, restart, Levels, ipAddr);
 			break;
 		}
 		case QUIT_FLAG:

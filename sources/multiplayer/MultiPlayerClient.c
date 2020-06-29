@@ -60,7 +60,9 @@ void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 		mvwprintw(stdscr, MAP_ROW_COUNT + 5, MAP_COL_COUNT - 4, WAIT_OPPONENT);
 		refresh();
 		pthread_join(recieverThread, NULL);
+
+		MultiPlayerWin(turnCount, args.turnCount);
+
 		CleanStdin();
-		//getch();
 	}
 }

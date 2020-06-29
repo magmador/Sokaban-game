@@ -45,6 +45,9 @@
 #define MSG_FROM_CLIENT 	"CONNECT"
 #define MSG_TO_CLIENT 		"SUCCESS"
 #define MSG_LVL_END			"LVL END"
+#define MULTIPLAYER_LOST	"YOU LOST"
+#define MULTIPLAYER_WON		"YOU WON"
+#define MULTIPLAYER_DRAW	"DRAW"
 
 #define NOT_PL_SPACE_MAP_OBJ -1
 #define SPACE_MAP_OBJ 		  0
@@ -184,7 +187,7 @@ void DrawMultiplayerMenu(WINDOW *multiWnd);
 /* Функция игры в синглплеере */
 void SinglePlayer(WINDOW *lvlWnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция выбора режима в мультиплеере */
-void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
+void MultiPlayer(WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[], char *ipAddr);
 /* Функция игры в качестве клиента */
 void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd, WINDOW *lvl2Wnd, int **map, Object Player, size_t boxCount, Object *Boxs, size_t endpointCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция игры в качестве сервера */
@@ -203,5 +206,7 @@ void CharToMap(int **map, NetworkBuffer *OutBuffer, char *buf);
 void LevelEndSend(int *socket_fd, struct sockaddr_in *addr, FILE *logFile);
 /* Функция очистки стандартного потока ввода */
 void CleanStdin(void);
+/* Функция проверки победы в мультиплеере */
+void MultiPlayerWin(size_t turnCountMIne, size_t turnCountOp);
 
 #endif
