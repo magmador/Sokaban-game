@@ -1,6 +1,8 @@
 # Sokaban-game
 Сборка: > make
+
 Сборка с дебагом: > make source-debug
+
 Очистка сборки: make clean
 ***
 Запуск: ./bin/main
