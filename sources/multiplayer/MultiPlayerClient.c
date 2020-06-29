@@ -19,17 +19,17 @@ void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 		ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
 		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
 		args.levelCur = levelCur;
-		pthread_create(&recieverThread, NULL, (void *) OpponentReciever, (void *) &args);
+		pthread_create(&recieverThread, NULL, (void *)OpponentReciever, (void *)&args);
 
 		InBuffer.move = UP_MOVE;
 		InBuffer.turnCount = turnCount;
 		MapToChar(map, &InBuffer, buf);
-		if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
+		if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
 		{
 			fprintf(logFile, "Incorrect client send\n");
-		    exit(1);
+			exit(1);
 		}
-		
+
 		do
 		{
 			if (MultiPlayerMove(lvlWnd, map, &Player, boxCount, Boxs, endpointCount, Endpoints, logFile, &turnCount, &restart, levelCur, &InBuffer, buf, socket_fd, addr))
@@ -48,7 +48,7 @@ void MultiPlayerClient(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 				InBuffer.move = UP_MOVE;
 				InBuffer.turnCount = turnCount;
 				MapToChar(map, &InBuffer, buf);
-				if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
+				if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
 				{
 					fprintf(logFile, "Incorrect server send\n");
 					exit(1);

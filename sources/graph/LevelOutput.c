@@ -14,7 +14,7 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 
 	wbkgd(lvlWnd, COLOR_PAIR(5));
 	refresh();
-	
+
 	for (size_t row = 0; row < MAP_ROW_COUNT; row++)
 	{
 		for (size_t col = 0; col < MAP_COL_COUNT; col++)

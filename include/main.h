@@ -144,45 +144,45 @@ typedef struct{
     int levelCur;
 } ArgStruct;
 
-/* Инициализация ncurses */
+/* Функция инициализации ncurses */
 void InitCurses();
-/* Вывод карты уровня */
+/* Функция вывода карты уровня */
 void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur);
 /* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
 /* Функция передвижения персонажа */
 bool PlayerMove(WINDOW *lvlWnd, int **map, Object *player, size_t oCount, Object *boxs, size_t eCount, Object *endpoints, FILE *logFile, size_t *turnCount, bool *restart, int levelCur);
-/* Выбор уровня из пресета карт */
+/* Функция выбора уровня из пресета карт */
 bool LevelSelect(int levelNumber, int ***map);
-/* Инициализация массива объектов */
+/* Функция инициализации массива объектов */
 bool ObjInit(size_t *objCount, Object **Objs, int **map, int obj);
-/* Инициализация объекта игрока */
+/* Функция инициализации объекта игрока */
 bool PlayerInit(Object *Player, int **map, int obj);
-/* Движение вверх */
+/* Функция движения вверх */
 bool MoveUp(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints);
-/* Движение вниз */
+/* Функция движения вниз */
 bool MoveDown(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints);
-/* Движение влево */
+/* Функция движения влево */
 bool MoveLeft(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints);
-/* Движение вправо */
+/* Функция движения вправо */
 bool MoveRight(int **map, Object *player, size_t bCount, Object *boxs, size_t eCount, Object *endpoints); 
-/* Проверка условия локальной победы */
+/* Функция проверки условия локальной победы */
 bool Winable(Object *Boxs, Object *Endpoints, size_t bCount, size_t eCount);  
-/* Отрисовка меню */
+/* Функция отрисовки меню */
 void DrawMenu(WINDOW *menuWnd); 
-/* Выбор пунктов в меню */
+/* Функция выбора пунктов в меню */
 int PickMenu(WINDOW *menuWnd); 
-/* Инициализация объектов */
+/* Функция инициализации объектов */
 void ObjectInitialization(size_t *boxCount, Object **Boxs, FILE *logFile, size_t *endpointCount, Object **Endpoints, int ***map, Object *Player, int lvlNumber, size_t *turnCount);
-/* Инициализация сокета */
+/* Функция инициализации сокета */
 bool NetworkInit(int *socket_fd, bool server_init, FILE *logFile);
-/* Соединение между клиентом и сервером */
+/* Функция соединения между клиентом и сервером */
 bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, FILE *logFile);
-/* Вывод карты уровня оппонента в мультиплеере */
+/* Функция вывода карты уровня оппонента в мультиплеере */
 void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur);
-/* Удаление основного меню */
+/* Функция удаления основного меню */
 void DeleteMenu(WINDOW *menuWnd);
-/* Отрисовка меню выбора в мультиплеере */
+/* Функция отрисовки меню выбора в мультиплеере */
 void DrawMultiplayerMenu(WINDOW *multiWnd);
 /* Функция игры в синглплеере */
 void SinglePlayer(WINDOW *lvlWnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);

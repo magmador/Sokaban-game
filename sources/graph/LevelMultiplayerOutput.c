@@ -3,7 +3,7 @@
 void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur)
 {
 	werase(lvl2Wnd);
-	
+
 	wattron(lvl2Wnd, A_BOLD);
 	box(lvl2Wnd, 0, 0);
 

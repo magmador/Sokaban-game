@@ -2,23 +2,27 @@
 
 int main(int argc, char *argv[])
 {
+	/* Считывание ip адреса из argv */
 	char ipAddr[12];
-	if(argc > 1)
+	if (argc > 1)
 	{
 		strcpy(ipAddr, argv[1]);
 	}
-	else strcpy(ipAddr, "127.0.0.1");
+	else
+		strcpy(ipAddr, "127.0.0.1");
 
 	/* Блок инициализации ncurses */
 	InitCurses();
 	/* Окно меню */
 	WINDOW *menuWnd = newwin(MENU_ROWS, MENU_COLS, MENU_Y, MENU_X);
 	/* Окно игрока */
-	WINDOW *lvlWnd  = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
+	WINDOW *lvlWnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
 	/* Окно оппонента */
 	WINDOW *lvl2Wnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X_OPPONENT);
 
-	size_t turnCount = 0; //счетчик ходов - пока здесь
+	/* Счётчик ходов */
+	size_t turnCount = 0;
+
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */
 	FILE *logFile;
 	if ((logFile = fopen(LOGFILE, "w")) == NULL)
@@ -37,7 +41,7 @@ int main(int argc, char *argv[])
 	/* Количество ящиков и эндпоинтов*/
 	size_t boxCount, endpointCount;
 
-	/* Загрузка уровня */
+	/* Инициализация массива уровней */
 	int **map = NULL;
 	int Levels[LEVEL_COUNT] = {LEVEL_1, LEVEL_2, LEVEL_3};
 	bool restart = false;
