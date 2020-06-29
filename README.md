@@ -6,4 +6,4 @@
 Запуск прогарммы: ./bin/main
 Запуск программы с вводом ip-сервера: ./bin/main <ip>
 
-https://travis-ci.com/magmador/Sokaban-game.svg?branch=master
+[![Build Status](https://travis-ci.com/magmador/Sokaban-game.svg?branch=master)](https://travis-ci.com/magmador/Sokaban-game)
