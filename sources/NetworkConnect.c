@@ -17,8 +17,8 @@ bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, 
 			}
 			if (!strcmp(buf, MSG_FROM_CLIENT))
 			{
-				memcpy((void *)buf, (void *)MSG_TO_CLIENT, sizeof(MSG_TO_CLIENT));
-				if (sendto(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *)addr, len) == -1)
+				//memcpy((void *)buf, (void *)MSG_TO_CLIENT, sizeof(MSG_TO_CLIENT));
+				if (sendto(*socket_fd, MSG_TO_CLIENT, sizeof(MSG_TO_CLIENT), 0, (struct sockaddr *)addr, len) == -1)
 				{
 					fprintf(logFile, "Send request on connection fail!\n");
 					return false;
@@ -37,8 +37,8 @@ bool NetworkConnect(int *socket_fd, struct sockaddr_in *addr, bool server_init, 
 	else
 	{
 		/*Клиент*/
-		memcpy((void *)buf, (void *)MSG_FROM_CLIENT, sizeof(MSG_FROM_CLIENT));
-		if (sendto(*socket_fd, buf, sizeof(buf), 0, (struct sockaddr *)addr, len) == -1)
+		//memcpy((void *)buf, (void *)MSG_FROM_CLIENT, sizeof(MSG_FROM_CLIENT));
+		if (sendto(*socket_fd, MSG_FROM_CLIENT, sizeof(MSG_FROM_CLIENT), 0, (struct sockaddr *)addr, len) == -1)
 		{
 			fprintf(logFile, "Send request on connection fail!\n");
 			return false;

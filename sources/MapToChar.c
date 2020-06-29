@@ -9,5 +9,5 @@ void MapToChar(int **map, NetworkBuffer *InBuffer, char *buf)
 					(*InBuffer).map[i * MAP_COL_COUNT + j] = map[i][j];
 				}
 		}
-		memcpy(buf, InBuffer, MAP_SIZE + sizeof(bool) + sizeof(int));
+		memcpy(buf, InBuffer, NET_BUF_SIZE);
 }

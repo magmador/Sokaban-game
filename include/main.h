@@ -41,8 +41,10 @@
 #define MULTI_MENU_SERVER 	"S - SERVER"
 #define LVL_CLEAR  			"LEVEL CLEAR!"
 #define PRESS_KEY  			"PRESS ANY KEY..."
+#define WAIT_OPPONENT		"WAITING OPPONENT"
 #define MSG_FROM_CLIENT 	"CONNECT"
 #define MSG_TO_CLIENT 		"SUCCESS"
+#define MSG_LVL_END			"LVL END"
 
 #define NOT_PL_SPACE_MAP_OBJ -1
 #define SPACE_MAP_OBJ 		  0
@@ -56,7 +58,7 @@
 #define ROW_MAP_SIZE  MAP_ROW_COUNT * sizeof(int *)
 #define COL_MAP_SIZE  MAP_COL_COUNT * sizeof(int)
 #define MAP_SIZE 	  MAP_ROW_COUNT * MAP_COL_COUNT * sizeof(int)
-#define NET_BUF_SIZE  MAP_SIZE + sizeof(bool) + sizeof(int)
+#define NET_BUF_SIZE  MAP_SIZE + sizeof(bool) + sizeof(int) + sizeof(size_t) + sizeof(chtype)
 
 #define LVL_WIN_COLS MAP_COL_COUNT + 10
 #define LVL_WIN_ROWS MAP_ROW_COUNT + 5
@@ -124,7 +126,8 @@ typedef struct
 typedef struct
    {
 	   char map[MAP_SIZE];
-	   bool win;
+	   size_t turnCount;
+	   chtype move;
 	   int levelNumber;
    } NetworkBuffer;
 
@@ -196,5 +199,9 @@ void *OpponentReciever(void *arguments);
 void MapToChar(int **map, NetworkBuffer *InBuffer, char *buf);
 /* Функция парсинга строки в map */
 void CharToMap(int **map, NetworkBuffer *OutBuffer, char *buf);
+/* Функция отправки сообщения конца уровня */
+void LevelEndSend(int *socket_fd, struct sockaddr_in *addr, FILE *logFile);
+/* Функция очистки стандартного потока ввода */
+void CleanStdin(void);
 
 #endif

@@ -17,12 +17,14 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 	for (int levelCur = 0; levelCur < LEVEL_COUNT; levelCur++)
 	{
 		ObjectInitialization(&boxCount, &Boxs, logFile, &endpointCount, &Endpoints, &map, &Player, Levels[levelCur], &turnCount);
-		MapToChar(map, &InBuffer, buf);
 		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
 		args.levelCur = levelCur;
-		pthread_create(&recieverThread, NULL, (void *)OpponentReciever, (void *)&args);
+		pthread_create(&recieverThread, NULL, (void *) OpponentReciever, (void *) &args);
 
-		if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
+		InBuffer.move = UP_MOVE;
+		InBuffer.turnCount = turnCount;
+		MapToChar(map, &InBuffer, buf);
+		if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
 		{
 			fprintf(logFile, "Incorrect server send\n");
 			exit(1);
@@ -34,6 +36,7 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 			{
 				attron(COLOR_PAIR(5));
 				mvwprintw(stdscr, MAP_ROW_COUNT + 4, MAP_COL_COUNT - 4, LVL_CLEAR);
+				LevelEndSend(socket_fd, addr, logFile);
 				break;
 			}
 			if (restart)
@@ -42,8 +45,10 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 				LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
 				restart = false;
 
+				InBuffer.move = UP_MOVE;
+				InBuffer.turnCount = turnCount;
 				MapToChar(map, &InBuffer, buf);
-				if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
+				if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
 				{
 					fprintf(logFile, "Incorrect server send\n");
 					exit(1);
@@ -52,9 +57,10 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 		} while (1);
 
 		attron(COLOR_PAIR(5));
-		mvwprintw(stdscr, MAP_ROW_COUNT + 5, MAP_COL_COUNT - 4, PRESS_KEY);
-		pthread_join(recieverThread, NULL);
+		mvwprintw(stdscr, MAP_ROW_COUNT + 5, MAP_COL_COUNT - 4, WAIT_OPPONENT);
 		refresh();
-		getch();
+		pthread_join(recieverThread, NULL);
+		CleanStdin();
+		//getch();
 	}
 }

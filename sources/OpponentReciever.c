@@ -15,8 +15,15 @@ void *OpponentReciever(void *arguments)
 		{
 			fprintf(args->logFile, "Incorrect client recv\n");
 		}
+		if (!strcmp(buf, MSG_LVL_END))
+		{
+			break;
+		}
+
 		CharToMap(map, &OutBuffer, buf);
-		LevelMultiplayerOutput(args->lvl2Wnd, map, args->logFile, UP_MOVE, args->turnCount, args->levelCur + 1);
+		args->turnCount = OutBuffer.turnCount;
+		LevelMultiplayerOutput(args->lvl2Wnd, map, args->logFile, OutBuffer.move, args->turnCount, args->levelCur + 1);
 		sleep(0.5);
 	} while (1);
+	pthread_exit(NULL);
 }
