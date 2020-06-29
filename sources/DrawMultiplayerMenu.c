@@ -1,9 +1,7 @@
 #include "main.h"
 
-void DrawMultiplayerMenu()
+void DrawMultiplayerMenu(WINDOW *multiWnd)
 {
-    WINDOW *multiWnd = newwin(MULTI_MENU_ROWS, MULTI_MENU_COLS, MULTI_MENU_Y, MULTI_MENU_X);
-
     /* Две цветовых пары для самого окна и шрифта для удобства измения цветов */
     init_pair(1, COLOR_WHITE, COLOR_BLUE);
     init_pair(2, COLOR_WHITE, COLOR_BLUE);

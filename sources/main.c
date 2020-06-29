@@ -5,11 +5,11 @@ int main()
 	/* Блок инициализации ncurses */
 	InitCurses();
 	/* Окно меню */
-	WINDOW *menuWnd;
+	WINDOW *menuWnd = newwin(MENU_ROWS, MENU_COLS, MENU_Y, MENU_X);
 	/* Окно игрока */
-	WINDOW *lvlWnd;
+	WINDOW *lvlWnd  = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
 	/* Окно оппонента */
-	WINDOW *lvl2Wnd;
+	WINDOW *lvl2Wnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X_OPPONENT);
 
 	size_t turnCount = 0; //счетчик ходов - пока здесь
 	/* Файл логирования. Для отладочной информации. Перезаписывается при каждом запуске прогарммы */

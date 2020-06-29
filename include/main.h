@@ -177,7 +177,7 @@ void LevelMultiplayerOutput(WINDOW *lvl2Wnd, int **map, FILE *logFile, const cht
 /* Удаление основного меню */
 void DeleteMenu(WINDOW *menuWnd);
 /* Отрисовка меню выбора в мультиплеере */
-void DrawMultiplayerMenu();
+void DrawMultiplayerMenu(WINDOW *multiWnd);
 /* Функция игры в синглплеере */
 void SinglePlayer(WINDOW *lvlWnd, int **map, Object Player, size_t bCount, Object *Boxs, size_t eCount, Object *Endpoints, FILE *logFile, size_t turnCount, bool restart, int Levels[]);
 /* Функция выбора режима в мультиплеере */

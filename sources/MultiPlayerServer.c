@@ -14,7 +14,7 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 	args.logFile = logFile;
 	args.turnCount = turnCount;
 	args.levelCur = 0;
-	pthread_create(&recieverThread, NULL, (void *) OpponentReciever, (void *) &args);
+	pthread_create(&recieverThread, NULL, (void *)OpponentReciever, (void *)&args);
 
 	for (int levelCur = 0; levelCur < LEVEL_COUNT; levelCur++)
 	{
@@ -22,7 +22,7 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 		MapToChar(map, &InBuffer, buf);
 		LevelOutput(lvlWnd, map, logFile, UP_MOVE, turnCount, levelCur + 1);
 
-		if(sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
+		if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
 		{
 			fprintf(logFile, "Incorrect server send\n");
 			exit(1);
@@ -43,7 +43,7 @@ void MultiPlayerServer(int *socket_fd, struct sockaddr_in *addr, WINDOW *lvlWnd,
 				restart = false;
 
 				MapToChar(map, &InBuffer, buf);
-				if(sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *) addr, len) == -1)
+				if (sendto(*socket_fd, buf, NET_BUF_SIZE, 0, (struct sockaddr *)addr, len) == -1)
 				{
 					fprintf(logFile, "Incorrect server send\n");
 					exit(1);

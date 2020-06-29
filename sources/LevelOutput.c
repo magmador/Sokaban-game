@@ -2,8 +2,7 @@
 
 void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, size_t count, size_t levelCur)
 {
-	refresh();
-	lvlWnd = newwin(LVL_WIN_ROWS, LVL_WIN_COLS, MENU_Y, MENU_X);
+	werase(lvlWnd);
 	wattron(lvlWnd, A_BOLD);
 	box(lvlWnd, 0, 0);
 
@@ -14,7 +13,8 @@ void LevelOutput(WINDOW *lvlWnd, int **map, FILE *logFile, const chtype move, si
 	init_pair(5, COLOR_WHITE, COLOR_BLUE);
 
 	wbkgd(lvlWnd, COLOR_PAIR(5));
-
+	refresh();
+	
 	for (size_t row = 0; row < MAP_ROW_COUNT; row++)
 	{
 		for (size_t col = 0; col < MAP_COL_COUNT; col++)
